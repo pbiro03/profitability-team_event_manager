@@ -30,11 +30,11 @@ namespace prof1
             tb_hova.IsEnabled = false;
             cb_forgatok.IsEnabled = false;
             PopulateGridArrows();
-            //PopulateGridCircles();
+            PopulateGridCircles();
         }
         public int sum { get; set; }
         ArrowImage[] gridArrows = new ArrowImage[11];
-        ArrowImage[] gridCircles = new ArrowImage[4];
+        CircleImage[] gridCircles = new CircleImage[4];
         bool forgatok { get; set; }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -111,14 +111,15 @@ namespace prof1
         }
         void PopulateGridCircles()
         {
+            
+            gridCircles[0] = new CircleImage("r_circle", "r_circle.png", "red",2);
+            gridCircles[1] = new CircleImage("b_circle", "b_circle.png", "blue", 2);
+            gridCircles[2] = new CircleImage("g_circle", "g_circle.png", "green", 2);
+            gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", 2);
             for (int i = 0; i < gridCircles.Length; i++)
             {
-                //gridCircles[i] = new MirroredImage();
+                newCircleImage(gridCircles[i]);
             }
-            newCircleImage(gridCircles[0], "r_circle", "r_circle.png", "red",2);
-            newCircleImage(gridCircles[1], "b_circle", "b_circle.png", "blue",2);
-            newCircleImage(gridCircles[2], "g_circle", "g_circle.png", "green", 2);
-            newCircleImage(gridCircles[3], "y_circle", "y_circle.png", "yellow", 2);
         }
         void SetupArrowImage(ArrowImage image)
         {
@@ -132,13 +133,10 @@ namespace prof1
             }
             gr_trendlinetable.Children.Add(image);
         }
-        void newCircleImage(ArrowImage image, string name, string filename, string color, int column)
+        void newCircleImage(CircleImage image)
         {
-            image.Name = name;
-            image.Source = new BitmapImage(new Uri("Images/Circles/" + filename, UriKind.Relative));
-            image.Color = color;
-            Grid.SetColumn(image, column);
-            switch (color)
+            Grid.SetColumn(image, image.Column);
+            switch (image.Color)
             {
                 case "red":
                     Grid.SetRow(image, 5);
@@ -150,7 +148,6 @@ namespace prof1
                 case "yellow":
                     Grid.SetRow(image, 6); break;
             }
-            //ez minden színnél más
             gr_profit.Children.Add(image);
         }
         void MoveArrow(int sourceColumn, int destinationColumn)
@@ -169,7 +166,14 @@ namespace prof1
             gridArrows[sourceColumn] = null;
             gridArrows[destinationColumn] = sourceImage;
         }
-
+        //void MoveCircle(int sourceColumn, int destinationColumn)
+        //{
+        //    gr_profit.Children.Remove(gridArrows[sourceColumn]);
+        //    Grid.SetColumn(sourceImage, destinationColumn);
+        //    gr_profit.Children.Add(sourceImage);
+        //    gridArrows[sourceColumn] = null;
+        //    gridArrows[destinationColumn] = sourceImage;
+        //}
    
        
     }

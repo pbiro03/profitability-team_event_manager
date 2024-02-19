@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\Arrows\barrow.png" />
+    <None Remove="Images\Arrows\rarrow.png" />
+    <None Remove="Images\Arrows\yarrow.png" />
+    <None Remove="Images\Circles\b_circle.png" />
+    <None Remove="Images\Circles\g_circle.png" />
+    <None Remove="Images\Circles\r_circle.png" />
+    <None Remove="Images\Circles\y_circle.png" />
+    <None Remove="Images\garrow.png" />
+    <None Remove="Images\Profit.png" />
+    <None Remove="Images\Profit2.png" />
+    <None Remove="Images\TrendLine.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\Arrows\barrow.png" />
+    <Resource Include="Images\Arrows\garrow.png" />
+    <Resource Include="Images\Arrows\rarrow.png" />
+    <Resource Include="Images\Arrows\yarrow.png" />
+    <Resource Include="Images\Circles\b_circle.png" />
+    <Resource Include="Images\Circles\g_circle.png" />
+    <Resource Include="Images\Circles\r_circle.png" />
+    <Resource Include="Images\Circles\y_circle.png" />
+    <Resource Include="Images\Profit.png" />
+    <Resource Include="Images\Profit2.png" />
+    <Resource Include="Images\TrendLine.png" />
+  </ItemGroup>
+
+</Project>

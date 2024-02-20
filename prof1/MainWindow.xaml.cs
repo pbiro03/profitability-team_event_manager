@@ -219,7 +219,22 @@ namespace prof1
         {
             if (task_index!=data.Tasks.Length)
             {
+                lb_0.Background = Brushes.Black;
+                lb_1.Background = Brushes.Black;
+                lb_2.Background = Brushes.Black;
+                lb_3.Background = Brushes.Black;
                 tb_task.Text = data.Tasks[task_index];
+
+
+                if(data.TruckColors[task_index].Substring(0,1)=="1")                
+                    lb_0.Background = Brushes.Red;                
+                if(data.TruckColors[task_index].Substring(1, 1) == "1")
+                    lb_1.Background = Brushes.Blue;                
+                if(data.TruckColors[task_index].Substring(2, 1) == "1")
+                    lb_2.Background = Brushes.Yellow;  
+                if(data.TruckColors[task_index].Substring(3, 1) == "1")
+                    lb_3.Background = Brushes.Green;
+
                 task_index++;
             }
         }

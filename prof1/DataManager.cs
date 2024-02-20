@@ -14,8 +14,7 @@ namespace prof1
             string[] lines = File.ReadAllLines(filePath);
             
             string[] parts = lines[0].Split('#');
-            Tasks = new string[lines.Length - 1];
-            Array.Copy(lines, 1, Tasks, 0, lines.Length - 1);
+            
             RedProfit_Column = int.Parse(parts[0])-1;
             GreenProfit_Column = int.Parse(parts[1]) - 1;
             BlueProfit_Column = int.Parse(parts[2])-1;
@@ -45,7 +44,17 @@ namespace prof1
                 }
                 j++;
             }
-            
+
+            string[] laps = new string[lines.Length - 1];
+            Array.Copy(lines, 1, laps, 0, lines.Length - 1);
+            Tasks=new string[laps.Length];
+            TruckColors=new string[laps.Length];
+            for (int i = 0; i < laps.Length; i++)
+            {
+                string[] parts2 = laps[i].Split('#');
+                TruckColors[i] = parts2[0];
+                Tasks[i] = parts2[1];
+            }
         }
 
         public int RedProfit_Column {  get; }
@@ -61,5 +70,6 @@ namespace prof1
         public int Yellow1ArrowColumn { get; }
         public int Yellow2ArrowColumn { get; }   
         public string[] Tasks { get; }
+        public string[] TruckColors { get; }
     }
 }

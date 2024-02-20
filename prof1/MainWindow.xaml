@@ -59,6 +59,14 @@
                 <TextBox x:Name="tb_num2" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="0,15,0,0" />
             </StackPanel>
             <Button Grid.Row="0" Grid.Column="3" Content="Enter" FontSize="32" Click="Button_Click"/>
+            <Grid Grid.Row="1" Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="tb_task" Grid.Row="0" Grid.Column="0"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="Új feladat" Click="New_Task"/>
+            </Grid>
             <Grid x:Name="g_trendline" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -83,8 +91,9 @@
 
                 <TextBox x:Name="tb_honnan" Grid.Row="1" Grid.Column="1" FontSize="16"  Margin="25,3"/>
                 <TextBox x:Name="tb_hova" Grid.Row="2" Grid.Column="1" FontSize="16" Margin="25,3"/>
+                <Button Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Content="Új kör" Click="Button_Click_ujkor"/>
             </Grid>
-            <Button Grid.Column="2" Grid.Row="1" Content="Új kör" Click="Button_Click_ujkor"/>
+            
         </Grid>
 
 

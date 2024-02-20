@@ -214,8 +214,14 @@ namespace prof1
             gridArrows[sourceColumn] = null;
             gridArrows[destinationColumn] = sourceImage;
         }
-
-
-
+        int task_index = 0;
+        private void New_Task(object sender, RoutedEventArgs e)
+        {
+            if (task_index!=data.Tasks.Length)
+            {
+                tb_task.Text = data.Tasks[task_index];
+                task_index++;
+            }
+        }
     }
 }

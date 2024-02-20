@@ -11,9 +11,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace prof1
 {
@@ -41,20 +43,66 @@ namespace prof1
             int num1 = int.Parse(tb_num1.Text);
             int num2 = int.Parse(tb_num2.Text);
             sum = num1 + num2;
-            
-            //g_trendline.Visibility = Visibility.Visible;
-            if (gridArrows[sum-2]==null)
+
+            if (sum != 7 && gridArrows[sum-2]!=null)
             {
-                tb_honnan.IsEnabled=true;
-                cb_forgatok.IsEnabled=true;
-                tb_hova.Text = Convert.ToString(sum);
+                MovingCircle();
             }
-            else if (sum==7)
+
+            //g_trendline.Visibility = Visibility.Visible;
+            if (gridArrows[sum - 2] == null &&sum!=7)
             {
                 tb_honnan.IsEnabled = true;
-                tb_hova.IsEnabled=true;
+                cb_forgatok.IsEnabled = true;
+                tb_hova.Text = Convert.ToString(sum);
+            }
+            else if (sum == 7)
+            {
+                tb_honnan.IsEnabled = true;
+                tb_hova.IsEnabled = true;
                 cb_forgatok.IsEnabled = true;
             }
+
+        }
+        void MovingCircle()
+        {
+            
+            string act_color = string.Empty;
+            if (gridArrows[sum - 2].Color == "blue")
+                act_color = "blue";
+            else if (gridArrows[sum - 2].Color == "red")
+                act_color = "red";
+            else if (gridArrows[sum - 2].Color == "green")
+                act_color = "green";
+            else
+                act_color = "yellow";
+            int i = -1;
+            do { i++; } while (!gridCircles[i].Color.Equals(act_color));
+            if (gridCircles[i].Column==4 && !gridArrows[sum - 2].IsMirrored)
+            {
+                gridArrows[sum - 2].MirrorArrow();
+            }
+            else if(gridCircles[i].Column == 0 && gridArrows[sum - 2].IsMirrored)
+            {
+                gridArrows[sum - 2].MirrorArrow();
+            }
+            else if (gridArrows[sum - 2].IsMirrored)
+            {
+                gridCircles[i].Column--;
+                MoveCircle(gridCircles[i]);
+            }
+            else
+            {
+                gridCircles[i].Column++;
+                MoveCircle(gridCircles[i]);
+            }
+        }
+        void MoveCircle(CircleImage image)
+        {
+
+            gr_profit.Children.Remove(image);
+            Grid.SetColumn(image, image.Column);
+            gr_profit.Children.Add(image);
 
         }
 
@@ -63,8 +111,8 @@ namespace prof1
             int honnan = int.Parse(tb_honnan.Text);
             int hova;
             forgatok = false;
-            if(cb_forgatok.IsChecked == true) 
-            { 
+            if (cb_forgatok.IsChecked == true)
+            {
                 forgatok = true;
             }
             if (sum == 7)
@@ -73,9 +121,9 @@ namespace prof1
 
                 MoveArrow(honnan, hova); //joker!!!
             }
-            else if (gridArrows[sum-2]==null)
+            else if (gridArrows[sum - 2] == null)
             {
-                MoveArrow(honnan,sum);
+                MoveArrow(honnan, sum);
             }
         }
         private void Button_Click_ujkor(object sender, RoutedEventArgs e)
@@ -92,18 +140,18 @@ namespace prof1
         }
         void PopulateGridArrows()
         {
-            
+
             gridArrows[1] = new ArrowImage("garrow1", 1, "garrow.png", false, "green");
-            gridArrows[2] = new ArrowImage ("rarrow1", 2, "rarrow.png", false,"red");
+            gridArrows[2] = new ArrowImage("rarrow1", 2, "rarrow.png", false, "red");
             gridArrows[3] = new ArrowImage("yarrow1", 3, "yarrow.png", false, "yellow");
             gridArrows[4] = new ArrowImage("barrow1", 4, "barrow.png", false, "blue");
-            gridArrows[6] = new ArrowImage( "barrow2", 6, "barrow.png", true,"blue");
-            gridArrows[7] = new ArrowImage( "garrow2", 7, "garrow.png", true, "green");
-            gridArrows[8] = new ArrowImage( "rarrow2", 8, "rarrow.png",true,"red");
+            gridArrows[6] = new ArrowImage("barrow2", 6, "barrow.png", true, "blue");
+            gridArrows[7] = new ArrowImage("garrow2", 7, "garrow.png", true, "green");
+            gridArrows[8] = new ArrowImage("rarrow2", 8, "rarrow.png", true, "red");
             gridArrows[9] = new ArrowImage("yarrow2", 9, "yarrow.png", true, "yellow");
             for (int i = 0; i < gridArrows.Length; i++)
             {
-                if (gridArrows[i]!=null)
+                if (gridArrows[i] != null)
                 {
                     SetupArrowImage(gridArrows[i]);
                 }
@@ -111,8 +159,8 @@ namespace prof1
         }
         void PopulateGridCircles()
         {
-            
-            gridCircles[0] = new CircleImage("r_circle", "r_circle.png", "red",2);
+
+            gridCircles[0] = new CircleImage("r_circle", "r_circle.png", "red", 2);
             gridCircles[1] = new CircleImage("b_circle", "b_circle.png", "blue", 2);
             gridCircles[2] = new CircleImage("g_circle", "g_circle.png", "green", 2);
             gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", 2);
@@ -166,15 +214,8 @@ namespace prof1
             gridArrows[sourceColumn] = null;
             gridArrows[destinationColumn] = sourceImage;
         }
-        //void MoveCircle(int sourceColumn, int destinationColumn)
-        //{
-        //    gr_profit.Children.Remove(gridArrows[sourceColumn]);
-        //    Grid.SetColumn(sourceImage, destinationColumn);
-        //    gr_profit.Children.Add(sourceImage);
-        //    gridArrows[sourceColumn] = null;
-        //    gridArrows[destinationColumn] = sourceImage;
-        //}
-   
-       
+
+
+
     }
 }

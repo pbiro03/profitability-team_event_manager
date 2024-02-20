@@ -37,6 +37,7 @@ namespace prof1
         public int sum { get; set; }
         ArrowImage[] gridArrows = new ArrowImage[11];
         CircleImage[] gridCircles = new CircleImage[4];
+        DataManager data = new DataManager("elso_proba.txt");
         bool forgatok { get; set; }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -140,15 +141,14 @@ namespace prof1
         }
         void PopulateGridArrows()
         {
-
-            gridArrows[1] = new ArrowImage("garrow1", 1, "garrow.png", false, "green");
-            gridArrows[2] = new ArrowImage("rarrow1", 2, "rarrow.png", false, "red");
-            gridArrows[3] = new ArrowImage("yarrow1", 3, "yarrow.png", false, "yellow");
-            gridArrows[4] = new ArrowImage("barrow1", 4, "barrow.png", false, "blue");
-            gridArrows[6] = new ArrowImage("barrow2", 6, "barrow.png", true, "blue");
-            gridArrows[7] = new ArrowImage("garrow2", 7, "garrow.png", true, "green");
-            gridArrows[8] = new ArrowImage("rarrow2", 8, "rarrow.png", true, "red");
-            gridArrows[9] = new ArrowImage("yarrow2", 9, "yarrow.png", true, "yellow");
+            gridArrows[data.Green1ArrowColumn] = new ArrowImage("garrow1", data.Green1ArrowColumn, "garrow.png", false, "green");
+            gridArrows[data.Green2ArrowColumn] = new ArrowImage("garrow2", data.Green2ArrowColumn, "garrow.png", true, "green");
+            gridArrows[data.Red1ArrowColumn] = new ArrowImage("rarrow1", data.Red1ArrowColumn, "rarrow.png", false, "red");
+            gridArrows[data.Red2ArrowColumn] = new ArrowImage("rarrow2", data.Red2ArrowColumn, "rarrow.png", true, "red");
+            gridArrows[data.Yellow1ArrowColumn] = new ArrowImage("yarrow1", data.Yellow1ArrowColumn, "yarrow.png", false, "yellow");
+            gridArrows[data.Yellow2ArrowColumn] = new ArrowImage("yarrow2", data.Yellow2ArrowColumn, "yarrow.png", true, "yellow");
+            gridArrows[data.Blue1ArrowColumn] = new ArrowImage("barrow1", data.Blue1ArrowColumn, "barrow.png", false, "blue");
+            gridArrows[data.Blue2ArrowColumn] = new ArrowImage("barrow2", data.Blue2ArrowColumn, "barrow.png", true, "blue");
             for (int i = 0; i < gridArrows.Length; i++)
             {
                 if (gridArrows[i] != null)
@@ -160,10 +160,10 @@ namespace prof1
         void PopulateGridCircles()
         {
 
-            gridCircles[0] = new CircleImage("r_circle", "r_circle.png", "red", 2);
-            gridCircles[1] = new CircleImage("b_circle", "b_circle.png", "blue", 2);
-            gridCircles[2] = new CircleImage("g_circle", "g_circle.png", "green", 2);
-            gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", 2);
+            gridCircles[0] = new CircleImage("r_circle", "r_circle.png", "red", data.RedProfit_Column);
+            gridCircles[1] = new CircleImage("b_circle", "b_circle.png", "blue", data.BlueProfit_Column);
+            gridCircles[2] = new CircleImage("g_circle", "g_circle.png", "green", data.GreenProfit_Column);
+            gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", data.YellowProfit_Column);
             for (int i = 0; i < gridCircles.Length; i++)
             {
                 newCircleImage(gridCircles[i]);

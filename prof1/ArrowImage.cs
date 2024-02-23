@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -24,7 +25,7 @@ namespace prof1
             this.FileName = fileName;
             this.Column = column;
             this.Source= new BitmapImage(new Uri("Images/Arrows/" + fileName, UriKind.Relative));
-
+            this.Stretch= Stretch.Fill; 
         }
         public void MirrorArrow()
         {

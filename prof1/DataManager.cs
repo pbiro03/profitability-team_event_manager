@@ -17,10 +17,10 @@ namespace prof1
             
             RedProfit_Column = int.Parse(parts[0])-1;
             GreenProfit_Column = int.Parse(parts[1]) - 1;
-            BlueProfit_Column = int.Parse(parts[2])-1;
+            BlueProfit_Column = int.Parse(parts[2]) - 1;
             YellowProfit_Column = int.Parse(parts[3]) - 1;
             int j = 4;
-            for (int i = 0; i < 10; i++)
+            for (int i = 1; i < 11; i++)
             {
                 switch (parts[j]) {
                     case "p1": Red1ArrowColumn = i;

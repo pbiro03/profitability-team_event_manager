@@ -8,9 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Arrows\barrow.png" />
-    <None Remove="Images\Arrows\rarrow.png" />
-    <None Remove="Images\Arrows\yarrow.png" />
+    <None Remove="Images\Arrows\b_arrow.png" />
+    <None Remove="Images\Arrows\g_arrow.png" />
+    <None Remove="Images\Arrows\r_arrow.png" />
+    <None Remove="Images\Arrows\y_arrow.png" />
+    <None Remove="Images\background.png" />
     <None Remove="Images\Circles\b_circle.png" />
     <None Remove="Images\Circles\g_circle.png" />
     <None Remove="Images\Circles\r_circle.png" />
@@ -19,13 +21,16 @@
     <None Remove="Images\Profit.png" />
     <None Remove="Images\Profit2.png" />
     <None Remove="Images\TrendLine.png" />
+    <None Remove="Images\TrendLine1.png" />
+    <None Remove="Images\TrendLine2.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Arrows\barrow.png" />
-    <Resource Include="Images\Arrows\garrow.png" />
-    <Resource Include="Images\Arrows\rarrow.png" />
-    <Resource Include="Images\Arrows\yarrow.png" />
+    <Resource Include="Images\Arrows\b_arrow.png" />
+    <Resource Include="Images\Arrows\g_arrow.png" />
+    <Resource Include="Images\Arrows\r_arrow.png" />
+    <Resource Include="Images\Arrows\y_arrow.png" />
+    <Resource Include="Images\background.png" />
     <Resource Include="Images\Circles\b_circle.png" />
     <Resource Include="Images\Circles\g_circle.png" />
     <Resource Include="Images\Circles\r_circle.png" />
@@ -33,6 +38,8 @@
     <Resource Include="Images\Profit.png" />
     <Resource Include="Images\Profit2.png" />
     <Resource Include="Images\TrendLine.png" />
+    <Resource Include="Images\TrendLine1.png" />
+    <Resource Include="Images\TrendLine2.png" />
   </ItemGroup>
 
 </Project>

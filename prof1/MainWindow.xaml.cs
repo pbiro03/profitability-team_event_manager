@@ -27,6 +27,8 @@ namespace prof1
         public MainWindow()
         {
             InitializeComponent();
+            
+            
             //g_trendline.Visibility = Visibility.Collapsed;
             tb_honnan.IsEnabled = false;
             tb_hova.IsEnabled = false;
@@ -34,8 +36,11 @@ namespace prof1
             PopulateGridArrows();
             PopulateGridCircles();
         }
+       
+
+
         public int sum { get; set; }
-        ArrowImage[] gridArrows = new ArrowImage[11];
+        ArrowImage[] gridArrows = new ArrowImage[12];
         CircleImage[] gridCircles = new CircleImage[4];
         DataManager data = new DataManager("elso_proba.txt");
         bool forgatok { get; set; }
@@ -45,13 +50,13 @@ namespace prof1
             int num2 = int.Parse(tb_num2.Text);
             sum = num1 + num2;
 
-            if (sum != 7 && gridArrows[sum-2]!=null)
+            if (sum != 7 && gridArrows[sum-1]!=null)
             {
                 MovingCircle();
             }
 
             //g_trendline.Visibility = Visibility.Visible;
-            if (gridArrows[sum - 2] == null &&sum!=7)
+            if (gridArrows[sum - 1] == null &&sum!=7)
             {
                 tb_honnan.IsEnabled = true;
                 cb_forgatok.IsEnabled = true;
@@ -69,25 +74,25 @@ namespace prof1
         {
             
             string act_color = string.Empty;
-            if (gridArrows[sum - 2].Color == "blue")
+            if (gridArrows[sum - 1].Color == "blue")
                 act_color = "blue";
-            else if (gridArrows[sum - 2].Color == "red")
+            else if (gridArrows[sum - 1].Color == "red")
                 act_color = "red";
-            else if (gridArrows[sum - 2].Color == "green")
+            else if (gridArrows[sum - 1].Color == "green")
                 act_color = "green";
             else
                 act_color = "yellow";
             int i = -1;
             do { i++; } while (!gridCircles[i].Color.Equals(act_color));
-            if (gridCircles[i].Column==4 && !gridArrows[sum - 2].IsMirrored)
+            if (gridCircles[i].Column==4 && !gridArrows[sum - 1].IsMirrored)
             {
-                gridArrows[sum - 2].MirrorArrow();
+                gridArrows[sum - 1].MirrorArrow();
             }
-            else if(gridCircles[i].Column == 0 && gridArrows[sum - 2].IsMirrored)
+            else if(gridCircles[i].Column == 0 && gridArrows[sum - 1].IsMirrored)
             {
-                gridArrows[sum - 2].MirrorArrow();
+                gridArrows[sum - 1].MirrorArrow();
             }
-            else if (gridArrows[sum - 2].IsMirrored)
+            else if (gridArrows[sum - 1].IsMirrored)
             {
                 gridCircles[i].Column--;
                 MoveCircle(gridCircles[i]);
@@ -122,7 +127,7 @@ namespace prof1
 
                 MoveArrow(honnan, hova); //joker!!!
             }
-            else if (gridArrows[sum - 2] == null)
+            else if (gridArrows[sum - 1] == null)
             {
                 MoveArrow(honnan, sum);
             }
@@ -141,14 +146,14 @@ namespace prof1
         }
         void PopulateGridArrows()
         {
-            gridArrows[data.Green1ArrowColumn] = new ArrowImage("garrow1", data.Green1ArrowColumn, "garrow.png", false, "green");
-            gridArrows[data.Green2ArrowColumn] = new ArrowImage("garrow2", data.Green2ArrowColumn, "garrow.png", true, "green");
-            gridArrows[data.Red1ArrowColumn] = new ArrowImage("rarrow1", data.Red1ArrowColumn, "rarrow.png", false, "red");
-            gridArrows[data.Red2ArrowColumn] = new ArrowImage("rarrow2", data.Red2ArrowColumn, "rarrow.png", true, "red");
-            gridArrows[data.Yellow1ArrowColumn] = new ArrowImage("yarrow1", data.Yellow1ArrowColumn, "yarrow.png", false, "yellow");
-            gridArrows[data.Yellow2ArrowColumn] = new ArrowImage("yarrow2", data.Yellow2ArrowColumn, "yarrow.png", true, "yellow");
-            gridArrows[data.Blue1ArrowColumn] = new ArrowImage("barrow1", data.Blue1ArrowColumn, "barrow.png", false, "blue");
-            gridArrows[data.Blue2ArrowColumn] = new ArrowImage("barrow2", data.Blue2ArrowColumn, "barrow.png", true, "blue");
+            gridArrows[data.Green1ArrowColumn] = new ArrowImage("garrow1", data.Green1ArrowColumn, "g_arrow.png", false, "green");
+            gridArrows[data.Green2ArrowColumn] = new ArrowImage("garrow2", data.Green2ArrowColumn, "g_arrow.png", true, "green");
+            gridArrows[data.Red1ArrowColumn] = new ArrowImage("rarrow1", data.Red1ArrowColumn, "r_arrow.png", false, "red");
+            gridArrows[data.Red2ArrowColumn] = new ArrowImage("rarrow2", data.Red2ArrowColumn, "r_arrow.png", true, "red");
+            gridArrows[data.Yellow1ArrowColumn] = new ArrowImage("yarrow1", data.Yellow1ArrowColumn, "y_arrow.png", false, "yellow");
+            gridArrows[data.Yellow2ArrowColumn] = new ArrowImage("yarrow2", data.Yellow2ArrowColumn, "y_arrow.png", true, "yellow");
+            gridArrows[data.Blue1ArrowColumn] = new ArrowImage("barrow1", data.Blue1ArrowColumn, "b_arrow.png", false, "blue");
+            gridArrows[data.Blue2ArrowColumn] = new ArrowImage("barrow2", data.Blue2ArrowColumn, "b_arrow.png", true, "blue");
             for (int i = 0; i < gridArrows.Length; i++)
             {
                 if (gridArrows[i] != null)
@@ -172,7 +177,7 @@ namespace prof1
         void SetupArrowImage(ArrowImage image)
         {
             Grid.SetColumn(image, image.Column);
-            Grid.SetRow(image, 1);
+            Grid.SetRow(image, 2);
             if (image.IsMirrored)
             {
                 ScaleTransform scaleTransform = new ScaleTransform(-1, 1);
@@ -200,8 +205,8 @@ namespace prof1
         }
         void MoveArrow(int sourceColumn, int destinationColumn)
         {
-            sourceColumn = sourceColumn - 2;
-            destinationColumn = destinationColumn - 2;
+            sourceColumn = sourceColumn - 1;
+            destinationColumn = destinationColumn - 1;
             ArrowImage sourceImage = gridArrows[sourceColumn];
             if (forgatok)
             {

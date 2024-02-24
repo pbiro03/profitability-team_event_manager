@@ -27,8 +27,6 @@ namespace prof1
         public MainWindow()
         {
             InitializeComponent();
-            
-            
             //g_trendline.Visibility = Visibility.Collapsed;
             tb_honnan.IsEnabled = false;
             tb_hova.IsEnabled = false;
@@ -105,10 +103,18 @@ namespace prof1
         }
         void MoveCircle(CircleImage image)
         {
-
-            gr_profit.Children.Remove(image);
-            Grid.SetColumn(image, image.Column);
-            gr_profit.Children.Add(image);
+            if (image.Color.Equals("red") || image.Color.Equals("blue"))
+            {
+                gr_profit.Children.Remove(image);
+                Grid.SetColumn(image, image.Column);
+                gr_profit.Children.Add(image);
+            }
+            else
+            {
+                gr_profit1.Children.Remove(image);
+                Grid.SetColumn(image, image.Column);
+                gr_profit1.Children.Add(image);
+            }
 
         }
 
@@ -170,7 +176,7 @@ namespace prof1
             gridCircles[2] = new CircleImage("g_circle", "g_circle.png", "green", data.GreenProfit_Column);
             gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", data.YellowProfit_Column);
             for (int i = 0; i < gridCircles.Length; i++)
-            {
+            {               
                 newCircleImage(gridCircles[i]);
             }
         }
@@ -192,16 +198,21 @@ namespace prof1
             switch (image.Color)
             {
                 case "red":
-                    Grid.SetRow(image, 5);
+                    Grid.SetRow(image, 1);
+                    gr_profit.Children.Add(image);
                     break;
                 case "blue":
-                    Grid.SetRow(image, 8); break;
+                    Grid.SetRow(image, 3); gr_profit.Children.Add(image);
+                    break;
                 case "green":
-                    Grid.SetRow(image, 7); break;
+                    Grid.SetRow(image, 2); gr_profit1.Children.Add(image);
+                    break;
+
                 case "yellow":
-                    Grid.SetRow(image, 6); break;
+                    Grid.SetRow(image, 4); gr_profit1.Children.Add(image);
+                    break;
+
             }
-            gr_profit.Children.Add(image);
         }
         void MoveArrow(int sourceColumn, int destinationColumn)
         {

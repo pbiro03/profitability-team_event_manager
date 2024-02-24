@@ -15,8 +15,22 @@ namespace prof1
             this.Color = color;
             this.Name=name;
             this.Source= new BitmapImage(new Uri("Images/Circles/" + fileName, UriKind.Relative));
+            this.Stretch = System.Windows.Media.Stretch.Fill;
             this.Column = column;
+            this.Margin= CalculateMargin();
         }
+
+        System.Windows.Thickness CalculateMargin()
+        {
+            
+            int leftMargin = 20; 
+            int topMargin = 0; 
+            int rightMargin = 20; 
+            int bottomMargin = 0;
+
+            return new System.Windows.Thickness(leftMargin, topMargin, rightMargin, bottomMargin);
+        }
+
 
         public string Color {  get; set; }
         public int Column {  get; set; }

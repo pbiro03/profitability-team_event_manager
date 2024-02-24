@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -27,47 +29,22 @@ namespace prof1
         public MainWindow()
         {
             InitializeComponent();
-            //g_trendline.Visibility = Visibility.Collapsed;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
             tb_honnan.IsEnabled = false;
             tb_hova.IsEnabled = false;
             cb_forgatok.IsEnabled = false;
             PopulateGridArrows();
             PopulateGridCircles();
         }
-       
-
 
         public int sum { get; set; }
         ArrowImage[] gridArrows = new ArrowImage[12];
         CircleImage[] gridCircles = new CircleImage[4];
         DataManager data = new DataManager("elso_proba.txt");
         bool forgatok { get; set; }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            int num1 = int.Parse(tb_num1.Text);
-            int num2 = int.Parse(tb_num2.Text);
-            sum = num1 + num2;
-
-            if (sum != 7 && gridArrows[sum-1]!=null)
-            {
-                MovingCircle();
-            }
-
-            //g_trendline.Visibility = Visibility.Visible;
-            if (gridArrows[sum - 1] == null &&sum!=7)
-            {
-                tb_honnan.IsEnabled = true;
-                cb_forgatok.IsEnabled = true;
-                tb_hova.Text = Convert.ToString(sum);
-            }
-            else if (sum == 7)
-            {
-                tb_honnan.IsEnabled = true;
-                tb_hova.IsEnabled = true;
-                cb_forgatok.IsEnabled = true;
-            }
-
-        }
         void MovingCircle()
         {
             
@@ -138,18 +115,15 @@ namespace prof1
                 MoveArrow(honnan, sum);
             }
         }
-        private void Button_Click_ujkor(object sender, RoutedEventArgs e)
-        {
-            tb_num1.Text = string.Empty;
-            tb_num2.Text = string.Empty;
-            tb_honnan.Text = string.Empty;
-            tb_hova.Text = string.Empty;
-            cb_forgatok.IsChecked = false;
-            tb_honnan.IsEnabled = false;
-            tb_hova.IsEnabled = false;
-            cb_forgatok.IsEnabled = false;
-            //g_trendline.Visibility = Visibility.Collapsed;
-        }
+        //private void Button_Click_ujkor(object sender, RoutedEventArgs e)
+        //{
+        //    tb_honnan.Text = string.Empty;
+        //    tb_hova.Text = string.Empty;
+        //    cb_forgatok.IsChecked = false;
+        //    tb_honnan.IsEnabled = false;
+        //    tb_hova.IsEnabled = false;
+        //    cb_forgatok.IsEnabled = false;
+        //}
         void PopulateGridArrows()
         {
             gridArrows[data.Green1ArrowColumn] = new ArrowImage("garrow1", data.Green1ArrowColumn, "g_arrow.png", false, "green");
@@ -231,7 +205,7 @@ namespace prof1
             gridArrows[destinationColumn] = sourceImage;
         }
         int task_index = 0;
-        private void New_Task(object sender, RoutedEventArgs e)
+        private void New_Task()
         {
             if (task_index!=data.Tasks.Length)
             {
@@ -252,6 +226,63 @@ namespace prof1
                     lb_3.Background = Brushes.Green;
 
                 task_index++;
+            }
+        }
+
+        private void DiceRoll(object sender, RoutedEventArgs e)
+        {
+            DiceWindow diceWindow = new DiceWindow();
+            diceWindow.Owner = this;
+
+            // Set the startup location to center relative to the owner
+            diceWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            diceWindow.NumberConfirmed += NewWindow_NumberConfirmed;
+            diceWindow.Show();
+            // Show the new window
+            
+        }
+        TextBox tb_honnan = new TextBox();
+        CheckBox cb_forgatok = new CheckBox();
+        TextBox tb_hova = new TextBox();
+        private void NewWindow_NumberConfirmed(object sender, int number)
+        {
+            string num=number.ToString();
+            int num1 = int.Parse(num.Substring(0, 1));
+            int num2 = int.Parse(num.Substring(1, 1));
+            sum = num1 + num2;
+
+            if (sum != 7 && gridArrows[sum - 1] != null)
+            {
+                MovingCircle();
+            }
+            New_Task();
+        }
+        bool IsEmpty { get; set; } 
+        private void Action_Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridArrows[sum - 1] == null && sum != 7)
+            { 
+                IsEmpty = true;
+            }
+            ActionWindow actionWindow = new ActionWindow(sum,IsEmpty);
+            actionWindow.Show();
+            if (actionWindow.CardPosition!=null)
+            {
+                string realcolor = string.Empty;
+                switch(actionWindow.CardColor)
+                {
+                    case "piros": realcolor = "red"; break;
+                    case "kék": realcolor = "blue"; break;
+                    case "sárga": realcolor = "yellow"; break;
+                    case "zöld": realcolor = "green"; break;
+                }
+                foreach (var circle in gridCircles)
+                {
+                    if (realcolor.Equals(circle.Color))
+                    {
+                        Grid.SetColumn(circle, actionWindow.CardPosition-1);
+                    }
+                }
             }
         }
     }

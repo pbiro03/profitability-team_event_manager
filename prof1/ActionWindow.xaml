@@ -1,0 +1,62 @@
+﻿<Window x:Class="prof1.ActionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:prof1"
+        mc:Ignorable="d"
+        Title="ActionWindow" Height="225" Width="400"
+        Loaded="Window_Loaded">
+    <Grid Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <Label Grid.Row="0" Content="TrendLine" Foreground="White" FontSize="16" FontStyle="Italic" Margin="0,0,0,0"/>
+        <Label Grid.Row="1" Grid.Column="0" x:Name="l_honnan"  Content="Honnan:" FontSize="16" Foreground="White" Margin="0,0,0,0"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Hova:" FontSize="16" Foreground="White" />
+        <CheckBox x:Name="cb_forgatok" Grid.Row="3" Grid.Column="0" Content="Forgatok" Foreground="White" FontSize="15"/>
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Content="Végrehajt" FontSize="16" Click="Button_Click_1"/>
+
+
+        <TextBox x:Name="tb_honnan" Grid.Row="1" Grid.Column="1" FontSize="16"/>
+        <TextBox x:Name="tb_hova" Grid.Row="2" Grid.Column="1" FontSize="16"/>
+
+
+
+        <Label Grid.Row="0" Grid.Column="2" Content="Joker" Foreground="White" FontSize="16" FontStyle="Italic" Margin="0,0,0,0"/>
+        <ComboBox x:Name="cb_profitcolor" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2">
+            <ComboBoxItem Content="Válassz színt!" IsSelected="True"/>
+            <ComboBoxItem Content="piros"/>
+            <ComboBoxItem Content="zöld"/>
+            <ComboBoxItem Content="kék"/>
+            <ComboBoxItem Content="sárga"/>
+        </ComboBox>
+        <RadioButton x:Name="radioButton1" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Content="Ár növelése" Foreground="White"  Margin="10" GroupName="Options" />
+        <RadioButton x:Name="radioButton2" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Content="Ár csökkentése" Foreground="White" Margin="10" GroupName="Options" />
+
+        <Label Grid.Row="0" Grid.Column="4" Content="Kártya" Foreground="White" FontSize="16" FontStyle="Italic" Margin="0,0,0,0"/>
+        <ComboBox x:Name="cb_cardcolor" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2">
+            <ComboBoxItem Content="Válassz színt!" IsSelected="True"/>
+            <ComboBoxItem Content="piros"/>
+            <ComboBoxItem Content="zöld"/>
+            <ComboBoxItem Content="kék"/>
+            <ComboBoxItem Content="sárga"/>
+        </ComboBox>
+        <Label Content="Pozíció:" Foreground="White" Grid.Row="2" Grid.Column="4"/>
+        <TextBox x:Name="tb_cardvalue" Grid.Row="2" Grid.Column="5"/>
+    </Grid>
+</Window>

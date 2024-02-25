@@ -18,7 +18,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
+//using static System.Net.Mime.MediaTypeNames;
 
 namespace prof1
 {
@@ -97,15 +97,7 @@ namespace prof1
         }
 
 
-        //private void Button_Click_ujkor(object sender, RoutedEventArgs e)
-        //{
-        //    tb_honnan.Text = string.Empty;
-        //    tb_hova.Text = string.Empty;
-        //    cb_forgatok.IsChecked = false;
-        //    tb_honnan.IsEnabled = false;
-        //    tb_hova.IsEnabled = false;
-        //    cb_forgatok.IsEnabled = false;
-        //}
+
         void PopulateGridArrows()
         {
             gridArrows[data.Green1ArrowColumn] = new ArrowImage("garrow1", data.Green1ArrowColumn, "g_arrow.png", false, "green");
@@ -191,10 +183,10 @@ namespace prof1
         {
             if (task_index != data.Tasks.Length)
             {
-                lb_0.Background = Brushes.Black;
-                lb_1.Background = Brushes.Black;
-                lb_2.Background = Brushes.Black;
-                lb_3.Background = Brushes.Black;
+                lb_0.Background = Brushes.Transparent;
+                lb_1.Background = Brushes.Transparent;
+                lb_2.Background = Brushes.Transparent;
+                lb_3.Background = Brushes.Transparent;
                 tbl_task.Text = data.Tasks[task_index];
 
 
@@ -226,18 +218,33 @@ namespace prof1
         TextBox tb_honnan = new TextBox();
         CheckBox cb_forgatok = new CheckBox();
         TextBox tb_hova = new TextBox();
+        
         private void NewWindow_NumberConfirmed(object sender, int number)
         {
             string num = number.ToString();
             int num1 = int.Parse(num.Substring(0, 1));
             int num2 = int.Parse(num.Substring(1, 1));
+            //DicePictureChanger(num1);
+
+            
+
             sum = num1 + num2;
+
 
             if (sum != 7 && gridArrows[sum - 1] != null)
             {
                 MovingCircle();
             }
             New_Task();
+
+
+
+            
+            
+            img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
+            img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num2}.png", UriKind.Relative));
+            
+            b_diceroll.IsEnabled = false;
         }
         bool IsEmpty { get; set; }
         CircleImage SelectArrow(string color)
@@ -270,7 +277,7 @@ namespace prof1
                 if (actionWindow.CardColor != null)
                 {
                     CircleImage circle = SelectArrow(actionWindow.CardColor);
-                    circle.Column = actionWindow.CardPosition-1;
+                    circle.Column = actionWindow.CardPosition - 1;
                     MoveCircle(circle);
                 }
             }
@@ -284,7 +291,7 @@ namespace prof1
             {
                 forgatok = actionWindow.Forgatok;
                 MoveArrow(actionWindow.Honnan, actionWindow.Hova);
-                if (actionWindow.JokerColor!=null)
+                if (actionWindow.JokerColor != null)
                 {
                     CircleImage circle = SelectArrow(actionWindow.JokerColor);
                     if (actionWindow.IsPlus)
@@ -297,8 +304,22 @@ namespace prof1
                     }
                     MoveCircle(circle);
                 }
-                
+
             }
         }
+
+        private void New_Round_Button(object sender, RoutedEventArgs e)
+        {
+            b_diceroll.IsEnabled = true;
+        }
+        //private void Button_Click_ujkor(object sender, RoutedEventArgs e)
+        //{
+        //    tb_honnan.Text = string.Empty;
+        //    tb_hova.Text = string.Empty;
+        //    cb_forgatok.IsChecked = false;
+        //    tb_honnan.IsEnabled = false;
+        //    tb_hova.IsEnabled = false;
+        //    cb_forgatok.IsEnabled = false;
+        //}
     }
 }

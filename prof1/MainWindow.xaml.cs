@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
@@ -47,7 +48,7 @@ namespace prof1
         bool forgatok { get; set; }
         void MovingCircle()
         {
-            
+
             string act_color = string.Empty;
             if (gridArrows[sum - 1].Color == "blue")
                 act_color = "blue";
@@ -59,11 +60,11 @@ namespace prof1
                 act_color = "yellow";
             int i = -1;
             do { i++; } while (!gridCircles[i].Color.Equals(act_color));
-            if (gridCircles[i].Column==4 && !gridArrows[sum - 1].IsMirrored)
+            if (gridCircles[i].Column == 4 && !gridArrows[sum - 1].IsMirrored)
             {
                 gridArrows[sum - 1].MirrorArrow();
             }
-            else if(gridCircles[i].Column == 0 && gridArrows[sum - 1].IsMirrored)
+            else if (gridCircles[i].Column == 0 && gridArrows[sum - 1].IsMirrored)
             {
                 gridArrows[sum - 1].MirrorArrow();
             }
@@ -95,26 +96,7 @@ namespace prof1
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            int honnan = int.Parse(tb_honnan.Text);
-            int hova;
-            forgatok = false;
-            if (cb_forgatok.IsChecked == true)
-            {
-                forgatok = true;
-            }
-            if (sum == 7)
-            {
-                hova = int.Parse(tb_hova.Text);
 
-                MoveArrow(honnan, hova); //joker!!!
-            }
-            else if (gridArrows[sum - 1] == null)
-            {
-                MoveArrow(honnan, sum);
-            }
-        }
         //private void Button_Click_ujkor(object sender, RoutedEventArgs e)
         //{
         //    tb_honnan.Text = string.Empty;
@@ -150,7 +132,7 @@ namespace prof1
             gridCircles[2] = new CircleImage("g_circle", "g_circle.png", "green", data.GreenProfit_Column);
             gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", data.YellowProfit_Column);
             for (int i = 0; i < gridCircles.Length; i++)
-            {               
+            {
                 newCircleImage(gridCircles[i]);
             }
         }
@@ -207,22 +189,22 @@ namespace prof1
         int task_index = 0;
         private void New_Task()
         {
-            if (task_index!=data.Tasks.Length)
+            if (task_index != data.Tasks.Length)
             {
                 lb_0.Background = Brushes.Black;
                 lb_1.Background = Brushes.Black;
                 lb_2.Background = Brushes.Black;
                 lb_3.Background = Brushes.Black;
-                tb_task.Text = data.Tasks[task_index];
+                tbl_task.Text = data.Tasks[task_index];
 
 
-                if(data.TruckColors[task_index].Substring(0,1)=="1")                
-                    lb_0.Background = Brushes.Red;                
-                if(data.TruckColors[task_index].Substring(1, 1) == "1")
-                    lb_1.Background = Brushes.Blue;                
-                if(data.TruckColors[task_index].Substring(2, 1) == "1")
-                    lb_2.Background = Brushes.Yellow;  
-                if(data.TruckColors[task_index].Substring(3, 1) == "1")
+                if (data.TruckColors[task_index].Substring(0, 1) == "1")
+                    lb_0.Background = Brushes.Red;
+                if (data.TruckColors[task_index].Substring(1, 1) == "1")
+                    lb_1.Background = Brushes.Blue;
+                if (data.TruckColors[task_index].Substring(2, 1) == "1")
+                    lb_2.Background = Brushes.Yellow;
+                if (data.TruckColors[task_index].Substring(3, 1) == "1")
                     lb_3.Background = Brushes.Green;
 
                 task_index++;
@@ -239,14 +221,14 @@ namespace prof1
             diceWindow.NumberConfirmed += NewWindow_NumberConfirmed;
             diceWindow.Show();
             // Show the new window
-            
+
         }
         TextBox tb_honnan = new TextBox();
         CheckBox cb_forgatok = new CheckBox();
         TextBox tb_hova = new TextBox();
         private void NewWindow_NumberConfirmed(object sender, int number)
         {
-            string num=number.ToString();
+            string num = number.ToString();
             int num1 = int.Parse(num.Substring(0, 1));
             int num2 = int.Parse(num.Substring(1, 1));
             sum = num1 + num2;
@@ -257,32 +239,65 @@ namespace prof1
             }
             New_Task();
         }
-        bool IsEmpty { get; set; } 
+        bool IsEmpty { get; set; }
+        CircleImage SelectArrow(string color)
+        {
+            string realcolor = string.Empty;
+            switch (color)
+            {
+                case "piros": realcolor = "red"; break;
+                case "kék": realcolor = "blue"; break;
+                case "sárga": realcolor = "yellow"; break;
+                case "zöld": realcolor = "green"; break;
+            }
+            int i = -1;
+            do
+            {
+                i++;
+            } while (!realcolor.Equals(gridCircles[i].Color));
+            return gridCircles[i];
+        }
+        ActionWindow actionWindow;
         private void Action_Button_Click(object sender, RoutedEventArgs e)
         {
             if (gridArrows[sum - 1] == null && sum != 7)
-            { 
+            {
                 IsEmpty = true;
             }
-            ActionWindow actionWindow = new ActionWindow(sum,IsEmpty);
-            actionWindow.Show();
-            if (actionWindow.CardPosition!=null)
+            actionWindow = new ActionWindow(sum, IsEmpty);
+            if (actionWindow.ShowDialog() == true)
             {
-                string realcolor = string.Empty;
-                switch(actionWindow.CardColor)
+                if (actionWindow.CardColor != null)
                 {
-                    case "piros": realcolor = "red"; break;
-                    case "kék": realcolor = "blue"; break;
-                    case "sárga": realcolor = "yellow"; break;
-                    case "zöld": realcolor = "green"; break;
+                    CircleImage circle = SelectArrow(actionWindow.CardColor);
+                    circle.Column = actionWindow.CardPosition-1;
+                    MoveCircle(circle);
                 }
-                foreach (var circle in gridCircles)
+            }
+
+            if (IsEmpty)
+            {
+                forgatok = actionWindow.Forgatok;
+                MoveArrow(actionWindow.Honnan, actionWindow.Hova);
+            }
+            else if (sum == 7)
+            {
+                forgatok = actionWindow.Forgatok;
+                MoveArrow(actionWindow.Honnan, actionWindow.Hova);
+                if (actionWindow.JokerColor!=null)
                 {
-                    if (realcolor.Equals(circle.Color))
+                    CircleImage circle = SelectArrow(actionWindow.JokerColor);
+                    if (actionWindow.IsPlus)
                     {
-                        Grid.SetColumn(circle, actionWindow.CardPosition-1);
+                        circle.Column++;
                     }
+                    else
+                    {
+                        circle.Column--;
+                    }
+                    MoveCircle(circle);
                 }
+                
             }
         }
     }

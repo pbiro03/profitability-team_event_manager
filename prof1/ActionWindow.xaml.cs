@@ -23,6 +23,11 @@ namespace prof1
         private bool empty;
         public int CardPosition { get; set; }
         public string CardColor { get; set; }
+        public string JokerColor { get; set; }
+        public bool IsPlus { get; set; }
+        public int Honnan {  get; set; }
+        public int Hova {  get; set; }
+        public bool Forgatok {  get; set; }
         public ActionWindow(int sum, bool isEmpty)
         {
             InitializeComponent();
@@ -35,7 +40,29 @@ namespace prof1
             {
                 CardPosition = int.Parse(tb_cardvalue.Text);
                 CardColor = cb_cardcolor.Text;
+                DialogResult = true;
             }
+            if(cb_forgatok.IsChecked == true)
+            {
+                Forgatok = true;
+            }
+            if (sum==7)
+            {
+                Honnan = int.Parse(tb_honnan.Text);
+                Hova = int.Parse(tb_hova.Text);
+                if (!cb_profitcolor.Text.Equals("Válassz színt!"))
+                {
+                    JokerColor = cb_profitcolor.Text;
+                    IsPlus = radioButton1.IsChecked == true;
+                }             
+            }
+            else if(empty && sum!=7)
+            {
+                Honnan = int.Parse(tb_honnan.Text);
+                Hova = sum;
+            }
+            Close();
+
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

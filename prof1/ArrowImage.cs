@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 
 namespace prof1
 {
-    class ArrowImage:Image
+    public class ArrowImage:Image
     {
         public bool IsMirrored {  get; set; }
         public string Color { get; set; }
@@ -26,6 +26,10 @@ namespace prof1
             this.Column = column;
             this.Source= new BitmapImage(new Uri("Images/Arrows/" + fileName, UriKind.Relative));
             this.Stretch= Stretch.Fill; 
+        }
+        public ArrowImage()
+        {
+            this.Stretch = Stretch.Fill;
         }
         public void MirrorArrow()
         {

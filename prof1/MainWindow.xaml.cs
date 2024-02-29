@@ -225,22 +225,12 @@ namespace prof1
             int num1 = int.Parse(num.Substring(0, 1));
             int num2 = int.Parse(num.Substring(1, 1));
             //DicePictureChanger(num1);
-
-            
-
             sum = num1 + num2;
-
-
             if (sum != 7 && gridArrows[sum - 1] != null)
             {
                 MovingCircle();
             }
-            New_Task();
-
-
-
-            
-            
+            New_Task();        
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num2}.png", UriKind.Relative));
             
@@ -311,6 +301,28 @@ namespace prof1
         private void New_Round_Button(object sender, RoutedEventArgs e)
         {
             b_diceroll.IsEnabled = true;
+        }
+
+        private void b_admin_Click(object sender, RoutedEventArgs e)
+        {
+            AdminWindow aw = new AdminWindow(gridArrows);
+            //aw.Show();
+            if (aw.ShowDialog()==true)
+            {
+                //Array.Copy(aw.gridArrows, gridArrows, aw.gridArrows.Length);
+                for (int i = 0; i < aw.gridArrows.Length; i++)
+                {
+                    gr_trendlinetable.Children.Remove(gridArrows[i]);
+                    if (aw.gridArrows[i] != null)
+                    {
+                        SetupArrowImage(aw.gridArrows[i]);
+                    }
+                    gridArrows[i] = aw.gridArrows[i];
+                }
+                ;
+            }
+            
+
         }
         //private void Button_Click_ujkor(object sender, RoutedEventArgs e)
         //{

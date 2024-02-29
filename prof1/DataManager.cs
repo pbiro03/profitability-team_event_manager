@@ -44,6 +44,7 @@ namespace prof1
                 }
                 j++;
             }
+            
 
             string[] laps = new string[lines.Length - 1];
             Array.Copy(lines, 1, laps, 0, lines.Length - 1);

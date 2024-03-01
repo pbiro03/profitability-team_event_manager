@@ -7,12 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowState="Maximized"
         Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:WindowSizeToFontSizeConverter x:Key="WindowSizeToFontSizeConverter"/>
+    </Window.Resources>
     <Grid x:Name="grid">
         <Grid.Background>
             <ImageBrush ImageSource="Images/background.png"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="1.2*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -21,7 +25,13 @@
             <ColumnDefinition Width="5.5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="gr_profit" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="20,100,40,30">
+        <TextBlock x:Name="tbl_teamnumber" 
+                   FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource WindowSizeToFontSizeConverter}}"
+                   Grid.Row="0" Grid.Column="1" 
+                   Foreground="White" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"/>
+        <Grid x:Name="gr_profit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.Background>
                 <ImageBrush ImageSource="Images/Profit.png"/>
             </Grid.Background>
@@ -41,7 +51,7 @@
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
         </Grid>
-        <Grid x:Name="gr_profit1" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="40,100,20,30">
+        <Grid x:Name="gr_profit1" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -58,19 +68,20 @@
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
         </Grid>
-        <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
+        <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="img_dice1" Grid.Column="0" Grid.Row="0" Stretch="Fill"/>
-            <Image x:Name="img_dice2" Grid.Column="1" Grid.Row="0" Stretch="Fill"/>
-            <Button x:Name="b_diceroll" Width="50" Height="50" Grid.Column="2" HorizontalAlignment="Right" Content="Dobás" Click="DiceRoll">
+            <Image x:Name="img_dice1" Grid.Column="1" Grid.Row="0" Stretch="Fill"/>
+            <Image x:Name="img_dice2" Grid.Column="2" Grid.Row="0" Stretch="Fill"/>
+            <Button x:Name="b_diceroll" Width="50" Height="50" Grid.Column="3" HorizontalAlignment="Right" Content="Dobás" Click="DiceRoll">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -80,7 +91,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_action" Width="50" Height="50" Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Akció" Click="Action_Button_Click">
+            <Button x:Name="b_action" Width="50" Height="50" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Akció" Click="Action_Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -90,7 +101,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_newround" Width="50" Height="50" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Új kör" Click="New_Round_Button">
+            <Button x:Name="b_newround" Width="50" Height="50" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Új kör" Click="New_Round_Button">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -100,7 +111,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_admin" Width="50" Height="50" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Admin" Click="b_admin_Click">
+            <Button x:Name="b_admin" Width="50" Height="50" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Admin" Click="b_admin_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -110,35 +121,23 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-
-            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="5*"/>
-                    <RowDefinition Height="10*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <Viewbox Grid.Row="1" Grid.ColumnSpan="4">
-                      <TextBlock x:Name="tbl_task" TextWrapping="Wrap" Background="Transparent" FontStyle="Italic" Foreground="AntiqueWhite" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                </Viewbox>
-                <!--<Button Grid.Row="2" Grid.ColumnSpan="4" Content="Új feladat" Click="New_Task"/>-->
-                <Label x:Name="lb_0" Grid.Row="0" Grid.Column="0"/>
-                <Label x:Name="lb_1" Grid.Row="0" Grid.Column="1"/>
-                <Label x:Name="lb_2" Grid.Row="0" Grid.Column="2"/>
-                <Label x:Name="lb_3" Grid.Row="0" Grid.Column="3"/>
-            </Grid>
-            
-            <!--<Button Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Content="Új kör" Click="Button_Click_ujkor"/>-->
-            
-
+            <Border BorderBrush="Black" Background="AntiqueWhite" BorderThickness="5" Grid.ColumnSpan="3" Grid.Row="2">
+                <TextBlock x:Name="tbl_task" 
+                    Grid.Row="1" 
+                    Grid.ColumnSpan="4" 
+                    TextWrapping="Wrap"
+                    FontStyle="Italic" 
+                    FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource WindowSizeToFontSizeConverter}}"
+                    Foreground="Black"
+                    HorizontalAlignment="Center"                           
+                    VerticalAlignment="Center"/>
+            </Border>
+            <!--<Label x:Name="lb_0" Grid.Row="0" Grid.Column="0"/>
+            <Label x:Name="lb_1" Grid.Row="0" Grid.Column="1"/>
+            <Label x:Name="lb_2" Grid.Row="0" Grid.Column="2"/>
+            <Label x:Name="lb_3" Grid.Row="0" Grid.Column="3"/>-->
         </Grid>
-
-
-        <Grid x:Name="gr_trendlinetable" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid x:Name="gr_trendlinetable" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.15*"/>
                 <ColumnDefinition Width="0.95*"/>

@@ -50,11 +50,13 @@ namespace prof1
             Array.Copy(lines, 1, laps, 0, lines.Length - 1);
             Tasks=new string[laps.Length];
             TruckColors=new string[laps.Length];
+            WhichTeamsRound=new int[laps.Length];
             for (int i = 0; i < laps.Length; i++)
             {
                 string[] parts2 = laps[i].Split('#');
                 TruckColors[i] = parts2[0];
                 Tasks[i] = parts2[1];
+                WhichTeamsRound[i] = int.Parse(parts2[2]);
             }
         }
 
@@ -72,5 +74,6 @@ namespace prof1
         public int Yellow2ArrowColumn { get; }   
         public string[] Tasks { get; }
         public string[] TruckColors { get; }
+        public int[] WhichTeamsRound {  get; }
     }
 }

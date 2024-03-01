@@ -37,14 +37,17 @@ namespace prof1
             tb_honnan.IsEnabled = false;
             tb_hova.IsEnabled = false;
             cb_forgatok.IsEnabled = false;
+            tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]} csapat dob:";
+            tbl_teamnumber.Margin = new Thickness(20);
             PopulateGridArrows();
             PopulateGridCircles();
         }
-
+        int roundIndex = 0;
         public int sum { get; set; }
         ArrowImage[] gridArrows = new ArrowImage[12];
         CircleImage[] gridCircles = new CircleImage[4];
         DataManager data = new DataManager("elso_proba.txt");
+        ArrowImage[] prevousRoundSetup=new ArrowImage[12];
         bool forgatok { get; set; }
         void MovingCircle()
         {
@@ -181,26 +184,26 @@ namespace prof1
         int task_index = 0;
         private void New_Task()
         {
-            if (task_index != data.Tasks.Length)
-            {
-                lb_0.Background = Brushes.Transparent;
-                lb_1.Background = Brushes.Transparent;
-                lb_2.Background = Brushes.Transparent;
-                lb_3.Background = Brushes.Transparent;
-                tbl_task.Text = data.Tasks[task_index];
+            //if (task_index != data.Tasks.Length)
+            //{
+            //    lb_0.Background = Brushes.Transparent;
+            //    lb_1.Background = Brushes.Transparent;
+            //    lb_2.Background = Brushes.Transparent;
+            //    lb_3.Background = Brushes.Transparent;
+            //    tbl_task.Text = data.Tasks[task_index];
 
 
-                if (data.TruckColors[task_index].Substring(0, 1) == "1")
-                    lb_0.Background = Brushes.Red;
-                if (data.TruckColors[task_index].Substring(1, 1) == "1")
-                    lb_1.Background = Brushes.Blue;
-                if (data.TruckColors[task_index].Substring(2, 1) == "1")
-                    lb_2.Background = Brushes.Yellow;
-                if (data.TruckColors[task_index].Substring(3, 1) == "1")
-                    lb_3.Background = Brushes.Green;
+            //    if (data.TruckColors[task_index].Substring(0, 1) == "1")
+            //        lb_0.Background = Brushes.Red;
+            //    if (data.TruckColors[task_index].Substring(1, 1) == "1")
+            //        lb_1.Background = Brushes.Blue;
+            //    if (data.TruckColors[task_index].Substring(2, 1) == "1")
+            //        lb_2.Background = Brushes.Yellow;
+            //    if (data.TruckColors[task_index].Substring(3, 1) == "1")
+            //        lb_3.Background = Brushes.Green;
 
-                task_index++;
-            }
+            //    task_index++;
+            //}
         }
 
         private void DiceRoll(object sender, RoutedEventArgs e)
@@ -234,7 +237,7 @@ namespace prof1
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num2}.png", UriKind.Relative));
             
-            b_diceroll.IsEnabled = false;
+            b_diceroll.IsEnabled = true;
         }
         bool IsEmpty { get; set; }
         CircleImage SelectArrow(string color)
@@ -301,6 +304,9 @@ namespace prof1
         private void New_Round_Button(object sender, RoutedEventArgs e)
         {
             b_diceroll.IsEnabled = true;
+            Array.Copy(gridArrows, prevousRoundSetup, gridArrows.Length);
+            roundIndex++;
+            tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]} csapat dob:";
         }
 
         private void b_admin_Click(object sender, RoutedEventArgs e)
@@ -324,6 +330,8 @@ namespace prof1
             
 
         }
+
+       
         //private void Button_Click_ujkor(object sender, RoutedEventArgs e)
         //{
         //    tb_honnan.Text = string.Empty;

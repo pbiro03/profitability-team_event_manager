@@ -71,17 +71,19 @@
         <Grid Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="img_dice1" Grid.Column="1" Grid.Row="0" Stretch="Fill"/>
-            <Image x:Name="img_dice2" Grid.Column="2" Grid.Row="0" Stretch="Fill"/>
-            <Button x:Name="b_diceroll" Width="50" Height="50" Grid.Column="3" HorizontalAlignment="Right" Content="Dobás" Click="DiceRoll">
+            <Image x:Name="img_dice1" Grid.Column="2" Grid.Row="0" Stretch="Fill"/>
+            <Image x:Name="img_dice2" Grid.Column="3" Grid.Row="0" Stretch="Fill"/>
+            <Button x:Name="b_diceroll" Width="50" Height="50" Grid.Column="4" HorizontalAlignment="Right" Content="Dobás" Click="DiceRoll">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -91,7 +93,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_action" Width="50" Height="50" Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Akció" Click="Action_Button_Click">
+            <Button x:Name="b_action" Width="50" Height="50" Grid.Column="4" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Right" Content="Akció" Click="Action_Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -101,7 +103,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_newround" Width="50" Height="50" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Új kör" Click="New_Round_Button">
+            <Button x:Name="b_newround" Width="50" Height="50" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Új kör" Click="New_Round_Button">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -111,7 +113,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_admin" Width="50" Height="50" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Admin" Click="b_admin_Click">
+            <Button x:Name="b_admin" Width="50" Height="50" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Admin" Click="b_admin_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -121,21 +123,21 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Border BorderBrush="Black" Background="AntiqueWhite" BorderThickness="5" Grid.ColumnSpan="3" Grid.Row="2">
+            <Border BorderBrush="Black" Background="AntiqueWhite" BorderThickness="5" Grid.ColumnSpan="4" Grid.Row="2">
                 <TextBlock x:Name="tbl_task" 
                     Grid.Row="1" 
                     Grid.ColumnSpan="4" 
                     TextWrapping="Wrap"
-                    FontStyle="Italic" 
+                    FontStyle="Italic"                    
                     FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource WindowSizeToFontSizeConverter}}"
                     Foreground="Black"
                     HorizontalAlignment="Center"                           
                     VerticalAlignment="Center"/>
             </Border>
-            <!--<Label x:Name="lb_0" Grid.Row="0" Grid.Column="0"/>
-            <Label x:Name="lb_1" Grid.Row="0" Grid.Column="1"/>
-            <Label x:Name="lb_2" Grid.Row="0" Grid.Column="2"/>
-            <Label x:Name="lb_3" Grid.Row="0" Grid.Column="3"/>-->
+            <Image x:Name="im_truck0" Grid.Row="1" Grid.Column="0"/>
+            <Image x:Name="im_truck1" Grid.Row="1" Grid.Column="1"/>
+            <Image x:Name="im_truck2" Grid.Row="1" Grid.Column="2"/>
+            <Image x:Name="im_truck3" Grid.Row="1" Grid.Column="3"/>
         </Grid>
         <Grid x:Name="gr_trendlinetable" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>

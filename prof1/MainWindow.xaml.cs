@@ -184,26 +184,32 @@ namespace prof1
         int task_index = 0;
         private void New_Task()
         {
-            //if (task_index != data.Tasks.Length)
-            //{
-            //    lb_0.Background = Brushes.Transparent;
-            //    lb_1.Background = Brushes.Transparent;
-            //    lb_2.Background = Brushes.Transparent;
-            //    lb_3.Background = Brushes.Transparent;
-            //    tbl_task.Text = data.Tasks[task_index];
+            if (task_index != data.Tasks.Length)
+            {
+                //im_truck0.Background = Brushes.Transparent;
+                //lb_1.Background = Brushes.Transparent;
+                //lb_2.Background = Brushes.Transparent;
+                //lb_3.Background = Brushes.Transparent;
+                tbl_task.Text = data.Tasks[task_index];
 
-
-            //    if (data.TruckColors[task_index].Substring(0, 1) == "1")
-            //        lb_0.Background = Brushes.Red;
-            //    if (data.TruckColors[task_index].Substring(1, 1) == "1")
-            //        lb_1.Background = Brushes.Blue;
-            //    if (data.TruckColors[task_index].Substring(2, 1) == "1")
-            //        lb_2.Background = Brushes.Yellow;
-            //    if (data.TruckColors[task_index].Substring(3, 1) == "1")
-            //        lb_3.Background = Brushes.Green;
-
-            //    task_index++;
-            //}
+                if (data.TruckColors[task_index].Substring(0, 1) == "1")
+                    im_truck0.Source = new BitmapImage(new Uri("Images/Trucks/r_truck.png", UriKind.Relative));
+                else
+                    im_truck0.Source = null;
+                if (data.TruckColors[task_index].Substring(1, 1) == "1")
+                    im_truck1.Source = new BitmapImage(new Uri("Images/Trucks/b_truck.png", UriKind.Relative));
+                else
+                    im_truck1.Source = null;
+                if (data.TruckColors[task_index].Substring(2, 1) == "1")
+                    im_truck2.Source = new BitmapImage(new Uri("Images/Trucks/g_truck.png", UriKind.Relative));
+                else
+                    im_truck2.Source = null;
+                if (data.TruckColors[task_index].Substring(3, 1) == "1")
+                    im_truck3.Source = new BitmapImage(new Uri("Images/Trucks/y_truck.png", UriKind.Relative));
+                else
+                    im_truck3.Source = null;
+                task_index++;
+            }
         }
 
         private void DiceRoll(object sender, RoutedEventArgs e)

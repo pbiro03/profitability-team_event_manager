@@ -26,6 +26,10 @@
     <None Remove="Images\garrow.png" />
     <None Remove="Images\Profit.png" />
     <None Remove="Images\TrendLine2.png" />
+    <None Remove="Images\Trucks\b_truck.png" />
+    <None Remove="Images\Trucks\g_truck.png" />
+    <None Remove="Images\Trucks\r_truck.png" />
+    <None Remove="Images\Trucks\y_truck.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +50,10 @@
     <Resource Include="Images\Dices\dice_6.png" />
     <Resource Include="Images\Profit.png" />
     <Resource Include="Images\TrendLine2.png" />
+    <Resource Include="Images\Trucks\b_truck.png" />
+    <Resource Include="Images\Trucks\g_truck.png" />
+    <Resource Include="Images\Trucks\r_truck.png" />
+    <Resource Include="Images\Trucks\y_truck.png" />
   </ItemGroup>
 
 </Project>

@@ -11,12 +11,25 @@ namespace prof1
 {
     class WindowSizeToFontSizeConverter : IValueConverter
     {
+        private double factor;
+
+        public double Factor
+        {
+            get { return factor; }
+            set { factor = value; }
+        }
+
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
             double windowSize = (double)value;
 
-            double fontSize = windowSize * 0.02;
+            double fontSize = factor * windowSize;
+            
+            if (parameter != null && parameter.ToString() == "Bottom")
+            {
+                return new Thickness(0, 0, 0, windowSize * factor);
+            }
 
             return fontSize; 
         }

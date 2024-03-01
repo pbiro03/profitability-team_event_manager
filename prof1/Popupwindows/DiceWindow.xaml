@@ -12,9 +12,9 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <Label Content="Dobott számok:" Grid.Row="0"/>
-        <TextBox x:Name="tb_num" Grid.Row="1"/>
-        <Button Content="Ok" Grid.Row="2" Click="Button_Click"/>
+        <Label Content="Dobott számok:" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <TextBox x:Name="tb_num" Grid.Row="1" FontFamily="Montserrat" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Button Content="Ok" Grid.Row="2" Click="Button_Click" FontFamily="Montserrat" FontWeight="Bold"/>
 
     </Grid>
 </Window>

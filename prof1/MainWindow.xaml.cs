@@ -37,8 +37,7 @@ namespace prof1
             tb_honnan.IsEnabled = false;
             tb_hova.IsEnabled = false;
             cb_forgatok.IsEnabled = false;
-            tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]} csapat dob:";
-            tbl_teamnumber.Margin = new Thickness(20);
+            tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}. csapat dob:";
             PopulateGridArrows();
             PopulateGridCircles();
         }
@@ -84,18 +83,18 @@ namespace prof1
         }
         void MoveCircle(CircleImage image)
         {
-            if (image.Color.Equals("red") || image.Color.Equals("blue"))
-            {
+            //if (image.Color.Equals("red") || image.Color.Equals("blue"))
+            //{
                 gr_profit.Children.Remove(image);
                 Grid.SetColumn(image, image.Column);
                 gr_profit.Children.Add(image);
-            }
-            else
-            {
-                gr_profit1.Children.Remove(image);
-                Grid.SetColumn(image, image.Column);
-                gr_profit1.Children.Add(image);
-            }
+            //}
+            //else
+            //{
+            //    gr_profit1.Children.Remove(image);
+            //    Grid.SetColumn(image, image.Column);
+            //    gr_profit1.Children.Add(image);
+            //}
 
         }
 
@@ -150,17 +149,25 @@ namespace prof1
             {
                 case "red":
                     Grid.SetRow(image, 1);
+                    image.HorizontalAlignment = HorizontalAlignment.Left;
+                    image.VerticalAlignment = VerticalAlignment.Top;
                     gr_profit.Children.Add(image);
                     break;
                 case "blue":
-                    Grid.SetRow(image, 3); gr_profit.Children.Add(image);
+                    Grid.SetRow(image, 2); gr_profit.Children.Add(image);
+                    image.HorizontalAlignment = HorizontalAlignment.Left;
+                    image.VerticalAlignment = VerticalAlignment.Top;
                     break;
                 case "green":
-                    Grid.SetRow(image, 2); gr_profit1.Children.Add(image);
+                    Grid.SetRow(image, 1); gr_profit.Children.Add(image);
+                    image.HorizontalAlignment = HorizontalAlignment.Right;
+                    image.VerticalAlignment = VerticalAlignment.Bottom;
                     break;
 
                 case "yellow":
-                    Grid.SetRow(image, 4); gr_profit1.Children.Add(image);
+                    Grid.SetRow(image, 2); gr_profit.Children.Add(image);
+                    image.HorizontalAlignment = HorizontalAlignment.Right;
+                    image.VerticalAlignment = VerticalAlignment.Bottom;
                     break;
 
             }
@@ -186,10 +193,7 @@ namespace prof1
         {
             if (task_index != data.Tasks.Length)
             {
-                //im_truck0.Background = Brushes.Transparent;
-                //lb_1.Background = Brushes.Transparent;
-                //lb_2.Background = Brushes.Transparent;
-                //lb_3.Background = Brushes.Transparent;
+                
                 tbl_task.Text = data.Tasks[task_index];
 
                 if (data.TruckColors[task_index].Substring(0, 1) == "1")
@@ -239,7 +243,8 @@ namespace prof1
             {
                 MovingCircle();
             }
-            New_Task();        
+            New_Task();
+            
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num2}.png", UriKind.Relative));
             

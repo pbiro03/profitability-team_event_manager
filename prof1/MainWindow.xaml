@@ -29,7 +29,20 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="Images/manus.png" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top"/>
+        <Grid Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2.5*"/>
+            </Grid.ColumnDefinitions>
+            <Image Source="Images/manus.png" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top"/>
+            <Label x:Name="l_placeanddate" 
+                   Grid.Column="1" 
+                   Foreground="AntiqueWhite"
+                   FontFamily="Montserrat"
+                   FontWeight="Bold"/>
+        </Grid>
+        
+        
         <Grid x:Name="gr_profit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.Background>
                 <ImageBrush ImageSource="Images/Profit.png"/>
@@ -126,10 +139,12 @@
                     Grid.ColumnSpan="4" 
                     TextWrapping="Wrap"
                     FontFamily="Montserrat"
+                    FontWeight="DemiBold"
                     FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource WindowSizeToFontSizeConverter}}"                   
-                    Foreground="Black"                   
-                    HorizontalAlignment="Center"                           
-                    VerticalAlignment="Center"/>
+                    Foreground="Black"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"/>
             </Border>
             <Image x:Name="im_truck0" Grid.Row="1" Grid.Column="0"/>
             <Image x:Name="im_truck1" Grid.Row="1" Grid.Column="1"/>

@@ -37,7 +37,10 @@ namespace prof1
             tb_honnan.IsEnabled = false;
             tb_hova.IsEnabled = false;
             cb_forgatok.IsEnabled = false;
-            tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}. csapat dob:";
+            tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}. csapat:";
+            img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
+            img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
+            l_placeanddate.Content = data.PlaceNameandDate;
             PopulateGridArrows();
             PopulateGridCircles();
         }
@@ -102,18 +105,24 @@ namespace prof1
 
         void PopulateGridArrows()
         {
-            gridArrows[data.Green1ArrowColumn] = new ArrowImage("garrow1", data.Green1ArrowColumn, "g_arrow.png", false, "green");
-            gridArrows[data.Green2ArrowColumn] = new ArrowImage("garrow2", data.Green2ArrowColumn, "g_arrow.png", true, "green");
-            gridArrows[data.Red1ArrowColumn] = new ArrowImage("rarrow1", data.Red1ArrowColumn, "r_arrow.png", false, "red");
-            gridArrows[data.Red2ArrowColumn] = new ArrowImage("rarrow2", data.Red2ArrowColumn, "r_arrow.png", true, "red");
-            gridArrows[data.Yellow1ArrowColumn] = new ArrowImage("yarrow1", data.Yellow1ArrowColumn, "y_arrow.png", false, "yellow");
-            gridArrows[data.Yellow2ArrowColumn] = new ArrowImage("yarrow2", data.Yellow2ArrowColumn, "y_arrow.png", true, "yellow");
-            gridArrows[data.Blue1ArrowColumn] = new ArrowImage("barrow1", data.Blue1ArrowColumn, "b_arrow.png", false, "blue");
-            gridArrows[data.Blue2ArrowColumn] = new ArrowImage("barrow2", data.Blue2ArrowColumn, "b_arrow.png", true, "blue");
+            //gridArrows[data.Green1ArrowColumn] = new ArrowImage("garrow1", data.Green1ArrowColumn, "g_arrow.png", false, "green");
+            //gridArrows[data.Green2ArrowColumn] = new ArrowImage("garrow2", data.Green2ArrowColumn, "g_arrow.png", true, "green");
+            //gridArrows[data.Red1ArrowColumn] = new ArrowImage("rarrow1", data.Red1ArrowColumn, "r_arrow.png", false, "red");
+            //gridArrows[data.Red2ArrowColumn] = new ArrowImage("rarrow2", data.Red2ArrowColumn, "r_arrow.png", true, "red");
+            //gridArrows[data.Yellow1ArrowColumn] = new ArrowImage("yarrow1", data.Yellow1ArrowColumn, "y_arrow.png", false, "yellow");
+            //gridArrows[data.Yellow2ArrowColumn] = new ArrowImage("yarrow2", data.Yellow2ArrowColumn, "y_arrow.png", true, "yellow");
+            //gridArrows[data.Blue1ArrowColumn] = new ArrowImage("barrow1", data.Blue1ArrowColumn, "b_arrow.png", false, "blue");
+            //gridArrows[data.Blue2ArrowColumn] = new ArrowImage("barrow2", data.Blue2ArrowColumn, "b_arrow.png", true, "blue");
+            for (int i = 0; i < data.arrowImages.Length; i++)
+            {
+                if (data.arrowImages[i]!=null)
+                    gridArrows[data.arrowImages[i].Column] = new ArrowImage($"{data.arrowImages[i].Color.Substring(0, 1)}arrow{i}", data.arrowImages[i].Column, $"{data.arrowImages[i].Color.Substring(0, 1)}_arrow.png", data.arrowImages[i].IsMirrored, data.arrowImages[i].Color);
+            }
             for (int i = 0; i < gridArrows.Length; i++)
             {
                 if (gridArrows[i] != null)
                 {
+
                     SetupArrowImage(gridArrows[i]);
                 }
             }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -25,7 +26,7 @@ namespace prof1
             this.mainCircles = maingridCircles;
             InitializeComponent();
         }
-        RadioButton[,] trendlinebuttons;
+        OptionalRadioButton[,] trendlinebuttons;
         CheckBox[] rotatecheckbox;
         RadioButton[,] profitbuttons;
 
@@ -35,7 +36,7 @@ namespace prof1
         public CircleImage[] mainCircles;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            trendlinebuttons = new RadioButton[4, 10];
+            trendlinebuttons = new OptionalRadioButton[4, 10];
             rotatecheckbox = new CheckBox[10];
 
             int mainarrowind = 1;
@@ -53,7 +54,7 @@ namespace prof1
 
                 for (int j = 0; j < 4; j++)
                 {
-                    trendlinebuttons[j, i] = new RadioButton();
+                    trendlinebuttons[j, i] = new OptionalRadioButton();
                     trendlinebuttons[j, i].Name = $"rb_{i}{j}";
                     trendlinebuttons[j, i].HorizontalAlignment = HorizontalAlignment.Center;
                     trendlinebuttons[j, i].VerticalAlignment = VerticalAlignment.Center;
@@ -61,6 +62,8 @@ namespace prof1
                     Grid.SetRow(trendlinebuttons[j, i], j + 2);                   
                     trendlinebuttons[j, i].GroupName = $"r_{i}";
                     gr_admin.Children.Add(trendlinebuttons[j, i]);
+
+                   
                 }
                 if (mainArrows[mainarrowind] != null)
                 {

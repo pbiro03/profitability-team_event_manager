@@ -5,6 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>manus.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,12 +25,17 @@
     <None Remove="Images\Dices\dice_5.png" />
     <None Remove="Images\Dices\dice_6.png" />
     <None Remove="Images\garrow.png" />
+    <None Remove="Images\manus.png" />
     <None Remove="Images\Profit.png" />
     <None Remove="Images\TrendLine2.png" />
     <None Remove="Images\Trucks\b_truck.png" />
     <None Remove="Images\Trucks\g_truck.png" />
     <None Remove="Images\Trucks\r_truck.png" />
     <None Remove="Images\Trucks\y_truck.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="manus.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +54,7 @@
     <Resource Include="Images\Dices\dice_4.png" />
     <Resource Include="Images\Dices\dice_5.png" />
     <Resource Include="Images\Dices\dice_6.png" />
+    <Resource Include="Images\manus.png" />
     <Resource Include="Images\Profit.png" />
     <Resource Include="Images\TrendLine2.png" />
     <Resource Include="Images\Trucks\b_truck.png" />

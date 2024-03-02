@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 
 namespace prof1
 {
-    internal class CircleImage:Image
+    public class CircleImage:Image
     {
         public CircleImage(string name,string fileName,string color,int column)
         {
@@ -19,8 +19,11 @@ namespace prof1
             this.Column = column;
             
         }
+        public CircleImage()
+        {
+             
+        }
 
-        
 
 
         public string Color {  get; set; }

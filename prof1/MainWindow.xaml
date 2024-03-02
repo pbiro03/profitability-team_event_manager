@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prof1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" WindowState="Maximized"
+        Title="Profitability" Height="450" Width="800" WindowState="Maximized"
         Loaded="Window_Loaded">
     <Window.Resources>
         <local:WindowSizeToFontSizeConverter x:Key="DiceMargin" Factor="0.009"/>
@@ -28,7 +28,8 @@
             <ColumnDefinition Width="5.5*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        
+
+        <Image Source="Images/manus.png" Grid.Column="0" Grid.Row="0" VerticalAlignment="Top"/>
         <Grid x:Name="gr_profit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
             <Grid.Background>
                 <ImageBrush ImageSource="Images/Profit.png"/>
@@ -73,7 +74,7 @@
                 Foreground="White" 
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Bottom"/>
-            <Button x:Name="b_diceroll" Width="50" Height="50" Grid.Column="4" HorizontalAlignment="Right" Content="Dobás" Click="DiceRoll">
+            <Button x:Name="b_diceroll" Width="50" Height="50" Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Dobás" Click="DiceRoll">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -93,7 +94,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_newround" Width="50" Height="50" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Új kör" Click="New_Round_Button">
+            <Button x:Name="b_newround" Width="50" Height="50" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Új kör" Click="New_Round_Button">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -103,7 +104,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <Button x:Name="b_admin" Width="50" Height="50" Grid.Column="4" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Admin" Click="b_admin_Click">
+            <Button x:Name="b_admin" Width="50" Height="50" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Admin" Click="b_admin_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>

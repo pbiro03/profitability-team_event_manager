@@ -127,7 +127,7 @@ namespace prof1
             gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", data.YellowProfit_Column);
             for (int i = 0; i < gridCircles.Length; i++)
             {
-                newCircleImage(gridCircles[i]);
+                SetupCircleImage(gridCircles[i]);
             }
         }
         void SetupArrowImage(ArrowImage image)
@@ -142,7 +142,7 @@ namespace prof1
             }
             gr_trendlinetable.Children.Add(image);
         }
-        void newCircleImage(CircleImage image)
+        void SetupCircleImage(CircleImage image)
         {
             Grid.SetColumn(image, image.Column);
             switch (image.Color)
@@ -154,20 +154,23 @@ namespace prof1
                     gr_profit.Children.Add(image);
                     break;
                 case "blue":
-                    Grid.SetRow(image, 2); gr_profit.Children.Add(image);
+                    Grid.SetRow(image, 2); 
                     image.HorizontalAlignment = HorizontalAlignment.Left;
                     image.VerticalAlignment = VerticalAlignment.Top;
+                    gr_profit.Children.Add(image);
                     break;
                 case "green":
-                    Grid.SetRow(image, 1); gr_profit.Children.Add(image);
+                    Grid.SetRow(image, 1); 
                     image.HorizontalAlignment = HorizontalAlignment.Right;
                     image.VerticalAlignment = VerticalAlignment.Bottom;
+                    gr_profit.Children.Add(image);
                     break;
 
                 case "yellow":
-                    Grid.SetRow(image, 2); gr_profit.Children.Add(image);
+                    Grid.SetRow(image, 2); 
                     image.HorizontalAlignment = HorizontalAlignment.Right;
                     image.VerticalAlignment = VerticalAlignment.Bottom;
+                    gr_profit.Children.Add(image);
                     break;
 
             }
@@ -220,13 +223,9 @@ namespace prof1
         {
             DiceWindow diceWindow = new DiceWindow();
             diceWindow.Owner = this;
-
-            // Set the startup location to center relative to the owner
             diceWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
             diceWindow.NumberConfirmed += NewWindow_NumberConfirmed;
             diceWindow.Show();
-            // Show the new window
-
         }
         TextBox tb_honnan = new TextBox();
         CheckBox cb_forgatok = new CheckBox();
@@ -322,11 +321,10 @@ namespace prof1
 
         private void b_admin_Click(object sender, RoutedEventArgs e)
         {
-            AdminWindow aw = new AdminWindow(gridArrows);
+            AdminWindow aw = new AdminWindow(gridArrows,gridCircles);
             //aw.Show();
             if (aw.ShowDialog()==true)
             {
-                //Array.Copy(aw.gridArrows, gridArrows, aw.gridArrows.Length);
                 for (int i = 0; i < aw.gridArrows.Length; i++)
                 {
                     gr_trendlinetable.Children.Remove(gridArrows[i]);
@@ -336,10 +334,14 @@ namespace prof1
                     }
                     gridArrows[i] = aw.gridArrows[i];
                 }
-                ;
-            }
-            
+                for (int i = 0; i < aw.gridCircles.Length; i++)
+                {
+                    gr_profit.Children.Remove(gridCircles[i]);                    
+                    SetupCircleImage(aw.gridCircles[i]);
+                    gridCircles[i] = aw.gridCircles[i];
+                }
 
+            }
         }
 
        

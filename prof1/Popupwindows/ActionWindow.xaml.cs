@@ -38,9 +38,29 @@ namespace prof1
         {
             if (tb_cardvalue!=null && !cb_cardcolor.Text.Equals("Válassz színt!"))
             {
-                CardPosition = int.Parse(tb_cardvalue.Text);
-                CardColor = cb_cardcolor.Text;
-                DialogResult = true;
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(tb_cardvalue.Text))
+                    {
+                        throw new ArgumentNullException("Adj meg egy számot", nameof(tb_cardvalue));
+                    }
+                    else if (!int.TryParse(tb_cardvalue.Text, out _) || int.Parse(tb_cardvalue.Text) < 1 || int.Parse(tb_cardvalue.Text) > 5 || tb_cardvalue.Text.Length > 1)
+                    {
+                        throw new FormatException("Rossz bemeneti formátum.\n Annak az oszlopnak a sorszámát írd be, ahova az értékjelzőt szeretnéd tenni");
+                    }
+                    CardPosition = int.Parse(tb_cardvalue.Text);
+                    CardColor = cb_cardcolor.Text;
+                    DialogResult = true;
+                }
+                catch (ArgumentNullException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             }
             if(cb_forgatok.IsChecked == true)
             {
@@ -48,20 +68,46 @@ namespace prof1
             }
             if (sum==7)
             {
-                Honnan = int.Parse(tb_honnan.Text);
-                Hova = int.Parse(tb_hova.Text);
-                if (!cb_profitcolor.Text.Equals("Válassz színt!"))
+                try
                 {
-                    JokerColor = cb_profitcolor.Text;
-                    IsPlus = radioButton1.IsChecked == true;
-                }             
+                    if (string.IsNullOrWhiteSpace(tb_honnan.Text)|| string.IsNullOrWhiteSpace(tb_hova.Text))
+                    {
+                        throw new ArgumentNullException("Hetest dobtál, add meg számmal, hogy honnan, hova szeretnél mozgatni");
+                    }
+                    else if (!int.TryParse(tb_honnan.Text, out _) || int.Parse(tb_honnan.Text) < 2 || int.Parse(tb_honnan.Text) > 12 || tb_honnan.Text.Length > 1 || int.Parse(tb_honnan.Text)==7)
+                    {
+                        throw new FormatException("Rossz bemeneti formátum.\n Annak a trendline pozíciónak a számát írd be, ahonnan a nyilat szeretnéd tenni.");
+                    }
+                    else if (!int.TryParse(tb_hova.Text, out _) || int.Parse(tb_hova.Text) < 2 || int.Parse(tb_hova.Text) > 12 || tb_hova.Text.Length > 1 || int.Parse(tb_hova.Text) == 7)
+                    {
+                        throw new FormatException("Rossz bemeneti formátum.\n Annak a trendline pozíciónak a számát írd be, ahonnan a nyilat szeretnéd tenni");
+                    }
+                    Honnan = int.Parse(tb_honnan.Text);
+                    Hova = int.Parse(tb_hova.Text);
+                    if (!cb_profitcolor.Text.Equals("Válassz színt!"))
+                    {
+                        JokerColor = cb_profitcolor.Text;
+                        IsPlus = radioButton1.IsChecked == true;
+                    }
+                    this.Close();
+                }
+                catch (ArgumentNullException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                catch (FormatException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                            
             }
             else if(empty && sum!=7)
             {
                 Honnan = int.Parse(tb_honnan.Text);
                 Hova = sum;
+                this.Close();
             }
-            Close();
+           
 
         }
 

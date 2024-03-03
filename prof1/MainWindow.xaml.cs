@@ -37,6 +37,7 @@ namespace prof1
             tb_honnan.IsEnabled = false;
             tb_hova.IsEnabled = false;
             cb_forgatok.IsEnabled = false;
+            b_action.IsEnabled = false;
             tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}";
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
@@ -247,8 +248,8 @@ namespace prof1
             
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num2}.png", UriKind.Relative));
-            
-            b_diceroll.IsEnabled = true;
+            b_diceroll.IsEnabled = false;
+            b_action.IsEnabled = true;
         }
         bool IsEmpty { get; set; }
         CircleImage SelectArrow(string color)
@@ -291,7 +292,7 @@ namespace prof1
                 forgatok = actionWindow.Forgatok;
                 MoveArrow(actionWindow.Honnan, actionWindow.Hova);
             }
-            else if (sum == 7)
+            else if (sum == 7 && actionWindow.Honnan!=0 && actionWindow.Hova!=0)
             {
                 forgatok = actionWindow.Forgatok;
                 MoveArrow(actionWindow.Honnan, actionWindow.Hova);
@@ -314,6 +315,7 @@ namespace prof1
         private void New_Round_Button(object sender, RoutedEventArgs e)
         {
             b_diceroll.IsEnabled = true;
+            b_action.IsEnabled = false;
             Array.Copy(gridArrows, prevousRoundSetup, gridArrows.Length);
             roundIndex++;
             if (roundIndex<data.Tasks.Length)

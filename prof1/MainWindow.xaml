@@ -62,7 +62,7 @@
         <Button x:Name="b_admin" 
                 Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
-                Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Admin" Click="b_admin_Click">
+                Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Admin" FontWeight="DemiBold" FontFamily="Montserrat" Click="b_admin_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Grid>
@@ -128,7 +128,7 @@
                 VerticalAlignment="Bottom"/>
             <Button x:Name="b_diceroll" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}" 
-                    Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Dobás" Click="DiceRoll">
+                    Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Dobás" Click="DiceRoll" FontWeight="DemiBold" FontFamily="Montserrat">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -141,7 +141,7 @@
             <Button x:Name="b_action" 
                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
-                    Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Akció" Click="Action_Button_Click">
+                    Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Akció" FontWeight="DemiBold" FontFamily="Montserrat" Click="Action_Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>
@@ -154,7 +154,7 @@
             <Button x:Name="b_newround" 
                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
-                    Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Új kör" Click="New_Round_Button">
+                    Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="DemiBold" FontFamily="Montserrat" Content="Új kör" Click="New_Round_Button">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Grid>

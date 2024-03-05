@@ -15,7 +15,8 @@
         <local:WindowSizeToFontSizeConverter x:Key="BorderThickness" Factor="0.005"/>
         <local:WindowSizeToFontSizeConverter x:Key="TeamNumbeBottomMargin" Factor="0.04"/>
         <local:WindowSizeToFontSizeConverter x:Key="RoundNumber" Factor="0.1"/>
-        <local:WindowSizeToFontSizeConverter x:Key="Button" Factor="0.05"/>
+        <local:WindowSizeToFontSizeConverter x:Key="Button" Factor="0.03"/>
+        <local:WindowSizeToFontSizeConverter x:Key="ButtonFontSize" Factor="0.008"/>
     </Window.Resources>
     <Grid x:Name="grid">
         <Grid.Background>
@@ -62,7 +63,8 @@
         </Grid>
         <Button x:Name="b_admin" 
                 Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
-                    Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
+                Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
+                FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource ButtonFontSize}}"
                 Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Content="Admin" FontWeight="DemiBold" FontFamily="Montserrat" Click="b_admin_Click">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -130,7 +132,8 @@
                 HorizontalAlignment="Center" 
                 VerticalAlignment="Bottom"/>
             <Button x:Name="b_diceroll" Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
-                    Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}" 
+                    Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
+                    FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource ButtonFontSize}}"
                     Grid.Column="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="Dobás" Click="DiceRoll" FontWeight="DemiBold" FontFamily="Montserrat">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -144,6 +147,7 @@
             <Button x:Name="b_action" 
                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
+                    FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource ButtonFontSize}}"
                     Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Content="Akció" FontWeight="DemiBold" FontFamily="Montserrat" Click="Action_Button_Click">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -157,6 +161,7 @@
             <Button x:Name="b_newround" 
                     Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
                     Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource Button}}"
+                    FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource ButtonFontSize}}"
                     Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="DemiBold" FontFamily="Montserrat" Content="Új kör" Click="New_Round_Button">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
@@ -167,7 +172,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            
+
             <Border x:Name="bo_task" 
                     BorderBrush="Black" 
                     Background="AntiqueWhite" 

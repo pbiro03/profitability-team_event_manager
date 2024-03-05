@@ -32,7 +32,7 @@ namespace prof1
                 {
                     throw new ArgumentNullException("Adj meg egy számot",nameof(tb_num));
                 }
-                else if (!int.TryParse(tb_num.Text, out _) || int.Parse(tb_num.Text.Substring(0,1))<1|| int.Parse(tb_num.Text.Substring(0, 1)) >6 || int.Parse(tb_num.Text.Substring(1, 1)) < 1 || int.Parse(tb_num.Text.Substring(1, 1)) > 6||tb_num.Text.Length>2)
+                else if (!int.TryParse(tb_num.Text, out _) || tb_num.Text.Length > 2 || tb_num.Text.Length ==1 || int.Parse(tb_num.Text.Substring(0,1))<1|| int.Parse(tb_num.Text.Substring(0, 1)) >6 || int.Parse(tb_num.Text.Substring(1, 1)) < 1 || int.Parse(tb_num.Text.Substring(1, 1)) > 6)
                 {
                     throw new FormatException("Rossz bemeneti formátum.\n A két kockával dobott számot egymás után space nélkül kell beírni");
                 }

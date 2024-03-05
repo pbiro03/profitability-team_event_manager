@@ -44,14 +44,15 @@ namespace prof1
             tbl_placeanddate.Text = data.PlaceNameandDate;
             tbl_round.Text = "1. kör";
             PopulateGridArrows();
-            PopulateGridCircles();
+            PopulateGridCircles();           
         }
         int roundIndex = 0;
         public int sum { get; set; }
         ArrowImage[] gridArrows = new ArrowImage[12];
         CircleImage[] gridCircles = new CircleImage[4];
         DataManager data = new DataManager("elso_proba.txt");
-        ArrowImage[] prevousRoundSetup=new ArrowImage[12];
+        ArrowImage[] previousRoundArrows=new ArrowImage[12];
+        CircleImage[] previousRoundCircles =new CircleImage[4];
         bool forgatok { get; set; }
         void MovingCircle()
         {
@@ -316,7 +317,31 @@ namespace prof1
         {
             b_diceroll.IsEnabled = true;
             b_action.IsEnabled = false;
-            Array.Copy(gridArrows, prevousRoundSetup, gridArrows.Length);
+            img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
+            img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
+            Array.Copy(gridArrows, previousRoundArrows, gridArrows.Length);
+            int i = 0;
+            foreach (var arrow in gridArrows)
+            {
+                
+                if (arrow!=null)
+                {
+                    ArrowImage newImage = new ArrowImage(arrow.Name, arrow.Column, arrow.Color.Substring(0, 1) + "_arrow.png", arrow.IsMirrored, arrow.Color);
+                    previousRoundArrows[i] = newImage;
+                }
+                else
+                {
+                    previousRoundArrows[i] = null;
+                }
+                i++;
+            }
+            i = 0;
+            foreach (var circle in gridCircles) 
+            {
+                CircleImage newImage= new CircleImage(circle.Name,circle.Color.Substring(0,1)+"_circle.png",circle.Color,circle.Column);
+                previousRoundCircles[i] = newImage;
+                i++;
+            }
             roundIndex++;
             if (roundIndex<data.Tasks.Length)
             {
@@ -331,7 +356,7 @@ namespace prof1
 
         private void b_admin_Click(object sender, RoutedEventArgs e)
         {
-            AdminWindow aw = new AdminWindow(gridArrows,gridCircles);
+            AdminWindow aw = new AdminWindow(gridArrows,gridCircles,previousRoundArrows,previousRoundCircles);
             //aw.Show();
             if (aw.ShowDialog()==true)
             {
@@ -346,8 +371,10 @@ namespace prof1
                 }
                 for (int i = 0; i < aw.gridCircles.Length; i++)
                 {
-                    gr_profit.Children.Remove(gridCircles[i]);                    
+                    gr_profit.Children.Remove(gridCircles[i]);
+                    
                     SetupCircleImage(aw.gridCircles[i]);
+                                       
                     gridCircles[i] = aw.gridCircles[i];
                 }
 

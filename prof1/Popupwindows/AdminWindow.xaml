@@ -6,7 +6,12 @@
         xmlns:local="clr-namespace:prof1"
         mc:Ignorable="d"
         Title="AdminWindow" Height="450" Width="600"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        >
+    <Window.Resources>
+        <local:WindowSizeToFontSizeConverter x:Key="PreviousState" Factor="0.2"/>
+        <local:WindowSizeToFontSizeConverter x:Key="PreviousStateFont" Factor="0.025"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -47,9 +52,26 @@
             <Label Grid.Row="4" Grid.Column="0" Background="LightYellow"/>
             <Label Grid.Row="5" Grid.Column="0" Background="LightGreen" />
         </Grid>
-        
-        
-        
+
+        <Button x:Name="b_admin" 
+        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PreviousState}}"
+            Height="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PreviousState}}"
+            FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource PreviousStateFont}}"
+        Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center"  FontWeight="DemiBold" FontFamily="Montserrat" Click="b_admin_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Fill="LightGray"/>
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </ControlTemplate>
+            </Button.Template>
+            <Button.Content>
+                <TextBlock Text="Vissza a kör elejére" TextWrapping="Wrap"/>
+            </Button.Content>
+        </Button>
+
+
         <Grid x:Name="gr_admin" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1.2*"/>

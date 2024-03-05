@@ -20,20 +20,24 @@ namespace prof1
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow(ArrowImage[] maingridArrows, CircleImage[] maingridCircles)
+        public AdminWindow(ArrowImage[] maingridArrows, CircleImage[] maingridCircles, ArrowImage[] previousRoundArrows, CircleImage[] PreviousRoundCircles)
         {
             this.mainArrows = maingridArrows;
             this.mainCircles = maingridCircles;
+            this.previousArrows = previousRoundArrows;
+            this.previousCircles = PreviousRoundCircles;
             InitializeComponent();
         }
         OptionalRadioButton[,] trendlinebuttons;
         CheckBox[] rotatecheckbox;
         RadioButton[,] profitbuttons;
 
-        public ArrowImage[] gridArrows;
-        public CircleImage[] gridCircles;
+        public ArrowImage[] gridArrows=new ArrowImage[12];
+        public CircleImage[] gridCircles = new CircleImage[4];
         public ArrowImage[] mainArrows;
         public CircleImage[] mainCircles;
+        public ArrowImage[] previousArrows;
+        public CircleImage[] previousCircles;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             trendlinebuttons = new OptionalRadioButton[4, 10];
@@ -112,7 +116,7 @@ namespace prof1
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            gridArrows = new ArrowImage[12];
+            //gridArrows = new ArrowImage[12];
             for (int i = 0; i < trendlinebuttons.GetLength(1); i++)
             {
                 for (int j = 0; j < trendlinebuttons.GetLength(0); j++)
@@ -153,7 +157,7 @@ namespace prof1
                 }
 
             }
-            gridCircles = new CircleImage[4];
+            //gridCircles = new CircleImage[4];
             for (int i = 0; i < profitbuttons.GetLength(0); i++)
             {
                 for (int j = 0; j < profitbuttons.GetLength(1); j++)
@@ -188,6 +192,13 @@ namespace prof1
             this.Close();
         }
 
-
+        private void b_admin_Click(object sender, RoutedEventArgs e)
+        {
+            ;
+            Array.Copy(previousArrows, gridArrows, gridArrows.Length);
+            Array.Copy(previousCircles, gridCircles, gridCircles.Length);
+            this.DialogResult = true;
+            this.Close();
+        }
     }
 }

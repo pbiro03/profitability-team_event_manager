@@ -44,7 +44,8 @@ namespace prof1
             tbl_placeanddate.Text = data.PlaceNameandDate;
             tbl_round.Text = "1. kör";
             PopulateGridArrows();
-            PopulateGridCircles();           
+            PopulateGridCircles();
+            ArrowCopy();
         }
         int roundIndex = 0;
         public int sum { get; set; }
@@ -68,11 +69,11 @@ namespace prof1
                 act_color = "yellow";
             int i = -1;
             do { i++; } while (!gridCircles[i].Color.Equals(act_color));
-            if (gridCircles[i].Column == 4 && !gridArrows[sum - 1].IsMirrored)
+            if (gridCircles[i].Column == 5 && !gridArrows[sum - 1].IsMirrored)
             {
                 gridArrows[sum - 1].MirrorArrow();
             }
-            else if (gridCircles[i].Column == 0 && gridArrows[sum - 1].IsMirrored)
+            else if (gridCircles[i].Column == 1 && gridArrows[sum - 1].IsMirrored)
             {
                 gridArrows[sum - 1].MirrorArrow();
             }
@@ -126,8 +127,8 @@ namespace prof1
 
             gridCircles[0] = new CircleImage("r_circle", "r_circle.png", "red", data.RedProfit_Column);
             gridCircles[1] = new CircleImage("b_circle", "b_circle.png", "blue", data.BlueProfit_Column);
-            gridCircles[2] = new CircleImage("g_circle", "g_circle.png", "green", data.GreenProfit_Column);
-            gridCircles[3] = new CircleImage("y_circle", "y_circle.png", "yellow", data.YellowProfit_Column);
+            gridCircles[3] = new CircleImage("g_circle", "g_circle.png", "green", data.GreenProfit_Column);
+            gridCircles[2] = new CircleImage("y_circle", "y_circle.png", "yellow", data.YellowProfit_Column);
             for (int i = 0; i < gridCircles.Length; i++)
             {
                 SetupCircleImage(gridCircles[i]);
@@ -157,22 +158,22 @@ namespace prof1
                     gr_profit.Children.Add(image);
                     break;
                 case "blue":
-                    Grid.SetRow(image, 2); 
+                    Grid.SetRow(image, 2);
                     image.HorizontalAlignment = HorizontalAlignment.Left;
                     image.VerticalAlignment = VerticalAlignment.Top;
                     gr_profit.Children.Add(image);
                     break;
                 case "green":
-                    Grid.SetRow(image, 1); 
+                    Grid.SetRow(image, 1);
                     image.HorizontalAlignment = HorizontalAlignment.Right;
-                    image.VerticalAlignment = VerticalAlignment.Bottom;
+                    image.VerticalAlignment = VerticalAlignment.Center;
                     gr_profit.Children.Add(image);
                     break;
 
                 case "yellow":
-                    Grid.SetRow(image, 2); 
+                    Grid.SetRow(image, 2);
                     image.HorizontalAlignment = HorizontalAlignment.Right;
-                    image.VerticalAlignment = VerticalAlignment.Bottom;
+                    image.VerticalAlignment = VerticalAlignment.Center;
                     gr_profit.Children.Add(image);
                     break;
 
@@ -300,15 +301,32 @@ namespace prof1
                 if (actionWindow.JokerColor != null)
                 {
                     CircleImage circle = SelectArrow(actionWindow.JokerColor);
-                    if (actionWindow.IsPlus)
+                    try
                     {
-                        circle.Column++;
+                        if (actionWindow.IsPlus)
+                        {
+                            circle.Column++;
+                            if (circle.Column > 5)
+                            {
+                                throw new FormatException("Már nem növelheted tovább a jokerprofit értékét");
+                            }
+                        }
+                        else
+                        {
+                            circle.Column--;
+                            if (circle.Column < 1)
+                            {
+                                throw new FormatException("Már nem csökkentheted tovább a jokerprofit értékét");
+                            }
+                        }
+                        MoveCircle(circle);
                     }
-                    else
+                    catch (FormatException ex)
                     {
-                        circle.Column--;
+                        MessageBox.Show(ex.Message);
+                        
                     }
-                    MoveCircle(circle);
+                    
                 }
 
             }
@@ -319,12 +337,26 @@ namespace prof1
             b_action.IsEnabled = false;
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
-            Array.Copy(gridArrows, previousRoundArrows, gridArrows.Length);
+            ArrowCopy();
+            tbl_task.Text = "";
+            roundIndex++;
+            if (roundIndex<data.Tasks.Length)
+            {
+                tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}";
+                tbl_round.Text = $"{roundIndex + 1}. kör";
+            }
+            else
+            {
+                MessageBox.Show("Elfogytak a kártyák");
+            }
+        }
+        void ArrowCopy()
+        {
             int i = 0;
             foreach (var arrow in gridArrows)
             {
-                
-                if (arrow!=null)
+
+                if (arrow != null)
                 {
                     ArrowImage newImage = new ArrowImage(arrow.Name, arrow.Column, arrow.Color.Substring(0, 1) + "_arrow.png", arrow.IsMirrored, arrow.Color);
                     previousRoundArrows[i] = newImage;
@@ -336,21 +368,11 @@ namespace prof1
                 i++;
             }
             i = 0;
-            foreach (var circle in gridCircles) 
+            foreach (var circle in gridCircles)
             {
-                CircleImage newImage= new CircleImage(circle.Name,circle.Color.Substring(0,1)+"_circle.png",circle.Color,circle.Column);
+                CircleImage newImage = new CircleImage(circle.Name, circle.Color.Substring(0, 1) + "_circle.png", circle.Color, circle.Column);
                 previousRoundCircles[i] = newImage;
                 i++;
-            }
-            roundIndex++;
-            if (roundIndex<data.Tasks.Length)
-            {
-                tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}";
-                tbl_round.Text = $"{roundIndex + 1}. kör";
-            }
-            else
-            {
-                MessageBox.Show("Elfogytak a kártyák");
             }
         }
 

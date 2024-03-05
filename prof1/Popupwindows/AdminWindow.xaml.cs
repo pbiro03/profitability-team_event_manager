@@ -102,9 +102,9 @@ namespace prof1
                     profitbuttons[i, j].VerticalAlignment = VerticalAlignment.Center;
                     profitbuttons[i, j].Name = $"prb_{i}{j}";
                     profitbuttons[i, j].HorizontalAlignment = HorizontalAlignment.Center;
-                    Grid.SetColumn(profitbuttons[i, j], j + 1);
+                    Grid.SetColumn(profitbuttons[i, j], j+1 );
                     Grid.SetRow(profitbuttons[i, j], i + 2);
-                    if (mainCircles[i].Column == j)
+                    if (mainCircles[i].Column == j+1)
                     {
                         profitbuttons[i, j].IsChecked = true;
                     }
@@ -165,7 +165,7 @@ namespace prof1
                     if (profitbuttons[i, j].IsChecked == true)
                     {
                         gridCircles[i] = new CircleImage();
-                        gridCircles[i].Column = j;
+                        gridCircles[i].Column = j+1;
                         switch (i)
                         {
                             case 0:
@@ -194,7 +194,7 @@ namespace prof1
 
         private void b_admin_Click(object sender, RoutedEventArgs e)
         {
-            ;
+            
             Array.Copy(previousArrows, gridArrows, gridArrows.Length);
             Array.Copy(previousCircles, gridCircles, gridCircles.Length);
             this.DialogResult = true;

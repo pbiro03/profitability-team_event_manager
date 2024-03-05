@@ -49,8 +49,8 @@
 
             <Label Grid.Row="2" Grid.Column="0" Background="LightPink"/>
             <Label Grid.Row="3" Grid.Column="0" Background="LightBlue"/>
-            <Label Grid.Row="4" Grid.Column="0" Background="LightYellow"/>
             <Label Grid.Row="5" Grid.Column="0" Background="LightGreen" />
+            <Label Grid.Row="4" Grid.Column="0" Background="LightYellow"/>
         </Grid>
 
         <Button x:Name="b_admin" 
@@ -67,7 +67,7 @@
                 </ControlTemplate>
             </Button.Template>
             <Button.Content>
-                <TextBlock Text="Vissza a kör elejére" TextWrapping="Wrap"/>
+                <TextBlock Text="Vissza a kör elejére" TextWrapping="Wrap" TextAlignment="Center"/>
             </Button.Content>
         </Button>
 

@@ -15,10 +15,10 @@ namespace prof1
             
             string[] parts = lines[0].Split('#');
             
-            RedProfit_Column = int.Parse(parts[0])-1;
-            GreenProfit_Column = int.Parse(parts[1]) - 1;
-            BlueProfit_Column = int.Parse(parts[2]) - 1;
-            YellowProfit_Column = int.Parse(parts[3]) - 1;
+            RedProfit_Column = int.Parse(parts[0]);
+            GreenProfit_Column = int.Parse(parts[1]);
+            BlueProfit_Column = int.Parse(parts[2]);
+            YellowProfit_Column = int.Parse(parts[3]);
             int j = 4;
             arrowImages = new ArrowImage[12];
             for (int i = 1; i < 12; i++)

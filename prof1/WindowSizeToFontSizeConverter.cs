@@ -30,6 +30,10 @@ namespace prof1
             {
                 return new Thickness(0, 0, 0, windowSize * factor);
             }
+            else if (parameter!=null&&parameter.ToString()=="Sides")
+            {
+                return new Thickness(windowSize * factor, 0, windowSize * factor,0);
+            }
 
             return fontSize; 
         }

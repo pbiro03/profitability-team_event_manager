@@ -10,6 +10,7 @@
     <Window.Resources>
         <local:WindowSizeToFontSizeConverter x:Key="DiceMargin" Factor="0.009"/>
         <local:WindowSizeToFontSizeConverter x:Key="WindowSizeToFontSizeConverter" Factor="0.02"/>
+        <local:WindowSizeToFontSizeConverter x:Key="TaskFontSize" Factor="0.0265"/>
         <local:WindowSizeToFontSizeConverter x:Key="TeamNumber" Factor="0.03"/>
         <local:WindowSizeToFontSizeConverter x:Key="BorderThickness" Factor="0.005"/>
         <local:WindowSizeToFontSizeConverter x:Key="TeamNumbeBottomMargin" Factor="0.04"/>
@@ -73,21 +74,23 @@
             </Button.Template>
         </Button>
 
-        <Grid x:Name="gr_profit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" >
+        <Grid x:Name="gr_profit" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
             <Grid.Background>
                 <ImageBrush ImageSource="Images/Profit.png"/>
             </Grid.Background>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="0.8*" />
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.8*"/>
+                <ColumnDefinition Width="0.2*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*" />
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="0.5*"/>
             </Grid.RowDefinitions>
@@ -97,7 +100,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.5*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -178,7 +181,7 @@
                     TextWrapping="Wrap"
                     FontFamily="Montserrat"
                     FontWeight="DemiBold"
-                    FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource WindowSizeToFontSizeConverter}}"                   
+                    FontSize="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource TaskFontSize}}"                   
                     Foreground="Black"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

@@ -179,6 +179,10 @@ namespace prof1
 
             }
         }
+        Image triangle = new Image();
+        Image downtriangle = new Image();
+
+
         void MoveArrow(int sourceColumn, int destinationColumn)
         {
             sourceColumn = sourceColumn - 1;
@@ -189,6 +193,18 @@ namespace prof1
                 sourceImage.MirrorArrow();
             }
 
+            //add triangle
+            
+            triangle.Source = new BitmapImage(new Uri("Images/triangle2.png", UriKind.Relative));
+            Grid.SetColumn(triangle, sourceColumn);
+            Grid.SetRow(triangle, 0);
+            gr_trendlinetable.Children.Add(triangle);
+            
+            downtriangle.Source = new BitmapImage(new Uri("Images/triangle3.png", UriKind.Relative));
+            Grid.SetColumn(downtriangle, destinationColumn);
+            Grid.SetRow(downtriangle, 0);
+            gr_trendlinetable.Children.Add(downtriangle);
+            //end 
             gr_trendlinetable.Children.Remove(gridArrows[sourceColumn]);
             Grid.SetColumn(sourceImage, destinationColumn);
             gr_trendlinetable.Children.Add(sourceImage);
@@ -284,7 +300,7 @@ namespace prof1
                 if (actionWindow.CardColor != null)
                 {
                     CircleImage circle = SelectArrow(actionWindow.CardColor);
-                    circle.Column = actionWindow.CardPosition - 1;
+                    circle.Column = actionWindow.CardPosition;
                     MoveCircle(circle);
                 }
             }
@@ -337,6 +353,8 @@ namespace prof1
             b_action.IsEnabled = false;
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
+            gr_trendlinetable.Children.Remove(triangle);
+            gr_trendlinetable.Children.Remove(downtriangle);
             ArrowCopy();
             tbl_task.Text = "";
             roundIndex++;

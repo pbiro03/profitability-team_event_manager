@@ -29,6 +29,9 @@
     <None Remove="Images\manus.png" />
     <None Remove="Images\Profit.png" />
     <None Remove="Images\TrendLine2.png" />
+    <None Remove="Images\triangle.png" />
+    <None Remove="Images\triangle2.png" />
+    <None Remove="Images\triangle3.png" />
     <None Remove="Images\Trucks\b_truck.png" />
     <None Remove="Images\Trucks\g_truck.png" />
     <None Remove="Images\Trucks\r_truck.png" />
@@ -59,6 +62,9 @@
     <Resource Include="Images\manus.png" />
     <Resource Include="Images\Profit.png" />
     <Resource Include="Images\TrendLine2.png" />
+    <Resource Include="Images\triangle.png" />
+    <Resource Include="Images\triangle2.png" />
+    <Resource Include="Images\triangle3.png" />
     <Resource Include="Images\Trucks\b_truck.png" />
     <Resource Include="Images\Trucks\g_truck.png" />
     <Resource Include="Images\Trucks\r_truck.png" />

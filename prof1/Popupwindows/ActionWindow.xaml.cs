@@ -28,11 +28,22 @@ namespace prof1
         public int Honnan { get; set; }
         public int Hova { get; set; }
         public bool Forgatok { get; set; }
-        public ActionWindow(int sum, bool isEmpty)
+        int[] EmptyColumns { get; set; }
+        public ActionWindow(int sum, bool isEmpty, ArrowImage[] gridArrows)
         {
             InitializeComponent();
             this.sum = sum;
             this.empty = isEmpty;
+            EmptyColumns = new int[2];
+            int j = 0;
+            for (int i = 1; i < gridArrows.Length; i++)
+            {
+                if (gridArrows[i]==null &&i!=6)
+                {
+                    EmptyColumns[j] = i+1;
+                    j++;
+                }
+            }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -74,13 +85,21 @@ namespace prof1
                     {
                         throw new ArgumentNullException("Hetest dobtál, add meg számmal, hogy honnan, hova szeretnél mozgatni");
                     }
-                    else if (!int.TryParse(tb_honnan.Text, out _) || int.Parse(tb_honnan.Text) < 2 || int.Parse(tb_honnan.Text) > 12 || tb_honnan.Text.Length > 1 || int.Parse(tb_honnan.Text) == 7)
+                    else if (!int.TryParse(tb_honnan.Text, out _) || int.Parse(tb_honnan.Text) < 2 || int.Parse(tb_honnan.Text) > 12 || int.Parse(tb_honnan.Text) == 7)
                     {
                         throw new FormatException("Rossz bemeneti formátum.\n Annak a trendline pozíciónak a számát írd be, ahonnan a nyilat szeretnéd tenni.");
                     }
-                    else if (!int.TryParse(tb_hova.Text, out _) || int.Parse(tb_hova.Text) < 2 || int.Parse(tb_hova.Text) > 12 || tb_hova.Text.Length > 1 || int.Parse(tb_hova.Text) == 7)
+                    else if (!int.TryParse(tb_hova.Text, out _) || int.Parse(tb_hova.Text) < 2 || int.Parse(tb_hova.Text) > 12 || int.Parse(tb_hova.Text) == 7)
                     {
                         throw new FormatException("Rossz bemeneti formátum.\n Annak a trendline pozíciónak a számát írd be, ahonnan a nyilat szeretnéd tenni");
+                    }
+                    else if (int.Parse(tb_honnan.Text) == EmptyColumns[0] || int.Parse(tb_honnan.Text) == EmptyColumns[1] )
+                    {
+                        throw new FormatException("Rossz bemeneti formátum.\n Üres helyről nem lehet mozgatni");
+                    }
+                    else if (int.Parse(tb_hova.Text) != EmptyColumns[0] && int.Parse(tb_hova.Text) != EmptyColumns[1])
+                    {
+                        throw new FormatException("Rossz bemeneti formátum.\n Egy pozícióban csak egy nyíl lehet");
                     }
                     Honnan = int.Parse(tb_honnan.Text);
                     Hova = int.Parse(tb_hova.Text);
@@ -102,12 +121,46 @@ namespace prof1
                 }
 
             }
-            else if (empty && sum != 7)
+            else
             {
-                Honnan = int.Parse(tb_honnan.Text);
-                Hova = sum;
-                this.Close();
+                
+                if (empty)
+                {
+                    try
+                    {
+                        if (string.IsNullOrWhiteSpace(tb_honnan.Text) || string.IsNullOrWhiteSpace(tb_hova.Text))
+                        {
+                            throw new ArgumentNullException("A dobott számok összege üres trendline pozícióra mutat. Add meg honnan szeretnél nyilat áthelyezni.");
+                        }
+                        else if (!int.TryParse(tb_honnan.Text, out _) || int.Parse(tb_honnan.Text) < 2 || int.Parse(tb_honnan.Text) > 12 || int.Parse(tb_honnan.Text) == 7)
+                        {
+                            throw new FormatException("Rossz bemeneti formátum.\n Annak a trendline pozíciónak a számát írd be, ahonnan a nyilat szeretnéd tenni.");
+                        }
+                        else if (int.Parse(tb_honnan.Text) == EmptyColumns[0] || int.Parse(tb_honnan.Text) == EmptyColumns[1])
+                        {
+                            throw new FormatException("Rossz bemeneti formátum.\n Üres helyről nem lehet mozgatni");
+                        }
+                        Honnan = int.Parse(tb_honnan.Text);
+                        Hova = sum;
+                        this.Close();
+                    }
+                    catch (ArgumentNullException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (FormatException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+                else
+                {
+                    this.Close();
+                }
+                
             }
+            
 
 
         }

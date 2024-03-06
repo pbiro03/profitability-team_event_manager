@@ -41,6 +41,8 @@ namespace prof1
             tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}";
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
+            downtriangle.Source = new BitmapImage(new Uri("Images/triangle3.png", UriKind.Relative)); 
+            triangle.Source = new BitmapImage(new Uri("Images/triangle2.png", UriKind.Relative));
             tbl_placeanddate.Text = data.PlaceNameandDate;
             tbl_round.Text = "1. kör";
             PopulateGridArrows();
@@ -71,10 +73,16 @@ namespace prof1
             do { i++; } while (!gridCircles[i].Color.Equals(act_color));
             if (gridCircles[i].Column == 5 && !gridArrows[sum - 1].IsMirrored)
             {
+                Grid.SetColumn(downtriangle, 11);
+                Grid.SetRow(downtriangle, 0);
+                gr_trendlinetable.Children.Add(downtriangle);
                 gridArrows[sum - 1].MirrorArrow();
             }
             else if (gridCircles[i].Column == 1 && gridArrows[sum - 1].IsMirrored)
             {
+                Grid.SetColumn(downtriangle, 1);
+                Grid.SetRow(downtriangle, 0);
+                gr_trendlinetable.Children.Add(downtriangle);
                 gridArrows[sum - 1].MirrorArrow();
             }
             else if (gridArrows[sum - 1].IsMirrored)
@@ -195,12 +203,10 @@ namespace prof1
 
             //add triangle
             
-            triangle.Source = new BitmapImage(new Uri("Images/triangle2.png", UriKind.Relative));
             Grid.SetColumn(triangle, sourceColumn);
             Grid.SetRow(triangle, 0);
             gr_trendlinetable.Children.Add(triangle);
             
-            downtriangle.Source = new BitmapImage(new Uri("Images/triangle3.png", UriKind.Relative));
             Grid.SetColumn(downtriangle, destinationColumn);
             Grid.SetRow(downtriangle, 0);
             gr_trendlinetable.Children.Add(downtriangle);
@@ -258,10 +264,10 @@ namespace prof1
             int num2 = int.Parse(num.Substring(1, 1));
             //DicePictureChanger(num1);
             sum = num1 + num2;
-            if (sum != 7 && gridArrows[sum - 1] != null)
-            {
-                MovingCircle();
-            }
+            //if (sum != 7 && gridArrows[sum - 1] != null)
+            //{
+            //    MovingCircle();
+            //}
             New_Task();
             
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
@@ -294,7 +300,7 @@ namespace prof1
             {
                 IsEmpty = true;
             }
-            actionWindow = new ActionWindow(sum, IsEmpty);
+            actionWindow = new ActionWindow(sum, IsEmpty, gridArrows);
             if (actionWindow.ShowDialog() == true)
             {
                 if (actionWindow.CardColor != null)
@@ -303,14 +309,14 @@ namespace prof1
                     circle.Column = actionWindow.CardPosition;
                     MoveCircle(circle);
                 }
+                
             }
-
-            if (IsEmpty)
+            if (IsEmpty && actionWindow.Honnan != 0)
             {
                 forgatok = actionWindow.Forgatok;
                 MoveArrow(actionWindow.Honnan, actionWindow.Hova);
             }
-            else if (sum == 7 && actionWindow.Honnan!=0 && actionWindow.Hova!=0)
+            else if (sum == 7 && actionWindow.Honnan != 0 && actionWindow.Hova != 0)
             {
                 forgatok = actionWindow.Forgatok;
                 MoveArrow(actionWindow.Honnan, actionWindow.Hova);
@@ -340,11 +346,16 @@ namespace prof1
                     catch (FormatException ex)
                     {
                         MessageBox.Show(ex.Message);
-                        
-                    }
-                    
-                }
 
+                    }
+                }
+            }
+            else
+            {
+                if (sum != 7 && gridArrows[sum - 1] != null)
+                {
+                    MovingCircle();
+                }
             }
         }
         private void New_Round_Button(object sender, RoutedEventArgs e)
@@ -355,6 +366,11 @@ namespace prof1
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
             gr_trendlinetable.Children.Remove(triangle);
             gr_trendlinetable.Children.Remove(downtriangle);
+            im_truck0.Source = null;
+            im_truck1.Source = null;
+            im_truck2.Source = null;
+            im_truck3.Source = null;
+
             ArrowCopy();
             tbl_task.Text = "";
             roundIndex++;
@@ -422,14 +438,5 @@ namespace prof1
         }
 
        
-        //private void Button_Click_ujkor(object sender, RoutedEventArgs e)
-        //{
-        //    tb_honnan.Text = string.Empty;
-        //    tb_hova.Text = string.Empty;
-        //    cb_forgatok.IsChecked = false;
-        //    tb_honnan.IsEnabled = false;
-        //    tb_hova.IsEnabled = false;
-        //    cb_forgatok.IsEnabled = false;
-        //}
     }
 }

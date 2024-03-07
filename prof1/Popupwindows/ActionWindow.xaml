@@ -26,9 +26,9 @@
 
 
         <Label Grid.Row="0" Content="TrendLine" Foreground="White" FontSize="16" FontFamily="Montserrat" FontWeight="Bold" Margin="0,0,0,0"/>
-        <Label Grid.Row="1" Grid.Column="0" x:Name="l_honnan"  Content="Honnan:" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="16" Foreground="White" Margin="0,0,0,0"/>
-        <Label Grid.Row="2" Grid.Column="0" Content="Hova:" FontSize="16" Foreground="White" FontFamily="Montserrat" FontWeight="DemiBold"/>
-        <CheckBox x:Name="cb_forgatok" Grid.Row="3" Grid.Column="0" Content="Forgatok" Foreground="White" FontSize="15" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <Label Grid.Row="1" Grid.Column="0" x:Name="l_honnan"  Content="Honnan:" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="16" Foreground="White" VerticalContentAlignment="Center"/>
+        <Label Grid.Row="2" Grid.Column="0" Content="Hova:" FontSize="16" Foreground="White" FontFamily="Montserrat" FontWeight="DemiBold" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="cb_forgatok" Grid.Row="3" Grid.Column="0" Content="Forgatok" Foreground="White" FontSize="15" FontFamily="Montserrat" FontWeight="DemiBold" VerticalContentAlignment="Center"/>
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Content="Végrehajt" FontSize="16" Click="Button_Click_1" FontFamily="Montserrat" FontWeight="Bold"/>
 
 
@@ -38,25 +38,25 @@
 
 
         <Label Grid.Row="0" Grid.Column="2" Content="Joker" Foreground="White" FontSize="16"  Margin="0,0,0,0" FontFamily="Montserrat" FontWeight="Bold"/>
-        <ComboBox x:Name="cb_profitcolor" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Montserrat" FontWeight="DemiBold">
+        <ComboBox x:Name="cb_profitcolor" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="16"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <ComboBoxItem Content="Válassz színt!" IsSelected="True"/>
             <ComboBoxItem Content="piros"/>
             <ComboBoxItem Content="zöld"/>
             <ComboBoxItem Content="kék"/>
             <ComboBoxItem Content="sárga"/>
         </ComboBox>
-        <RadioButton x:Name="radioButton1" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Content="Ár növelése" Foreground="White"  Margin="10" GroupName="Options" FontFamily="Montserrat" FontWeight="DemiBold"/>
-        <RadioButton x:Name="radioButton2" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Content="Ár csökkentése" Foreground="White" Margin="10" GroupName="Options" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <RadioButton x:Name="radioButton1" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Content="Ár növelése" Foreground="White"  Margin="10" FontSize="13" GroupName="Options" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <RadioButton x:Name="radioButton2" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2" Content="Ár csökkentése" Foreground="White" Margin="10" FontSize="13" GroupName="Options" FontFamily="Montserrat" FontWeight="DemiBold"/>
 
         <Label Grid.Row="0" Grid.Column="4" Content="Kártya" Foreground="White" FontSize="16" FontFamily="Montserrat" FontWeight="Bold" Margin="0,0,0,0"/>
-        <ComboBox x:Name="cb_cardcolor" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Montserrat" FontWeight="DemiBold">
+        <ComboBox x:Name="cb_cardcolor" Grid.Column="4" Grid.Row="1" Grid.ColumnSpan="2" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="16"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
             <ComboBoxItem Content="Válassz színt!" IsSelected="True"/>
             <ComboBoxItem Content="piros"/>
             <ComboBoxItem Content="zöld"/>
             <ComboBoxItem Content="kék"/>
             <ComboBoxItem Content="sárga"/>
         </ComboBox>
-        <Label Content="Pozíció:" Foreground="White" Grid.Row="2" Grid.Column="4" FontFamily="Montserrat" FontWeight="DemiBold"/>
-        <TextBox x:Name="tb_cardvalue" Grid.Row="2" Grid.Column="5" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <Label Content="Pozíció:" Foreground="White" Grid.Row="2" Grid.Column="4" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15"  VerticalContentAlignment="Center"/>
+        <TextBox x:Name="tb_cardvalue" Grid.Row="2" Grid.Column="5" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15"/>
     </Grid>
 </Window>

@@ -29,12 +29,14 @@ namespace prof1
         public int Hova { get; set; }
         public bool Forgatok { get; set; }
         int[] EmptyColumns { get; set; }
+        public bool EnterIsPressed { get; set; }
         public ActionWindow(int sum, bool isEmpty, ArrowImage[] gridArrows)
         {
             InitializeComponent();
             this.sum = sum;
             this.empty = isEmpty;
             EmptyColumns = new int[2];
+            this.EnterIsPressed = false;
             int j = 0;
             for (int i = 1; i < gridArrows.Length; i++)
             {
@@ -47,6 +49,7 @@ namespace prof1
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            EnterIsPressed = true;
             if (tb_cardvalue != null && !cb_cardcolor.Text.Equals("Válassz színt!"))
             {
                 try

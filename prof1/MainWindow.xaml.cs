@@ -41,7 +41,7 @@ namespace prof1
             tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}";
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice.png", UriKind.Relative));
-            downtriangle.Source = new BitmapImage(new Uri("Images/triangle3.png", UriKind.Relative)); 
+            downtriangle.Source = new BitmapImage(new Uri("Images/triangle3.png", UriKind.Relative));
             triangle.Source = new BitmapImage(new Uri("Images/triangle2.png", UriKind.Relative));
             tbl_placeanddate.Text = data.PlaceNameandDate;
             tbl_round.Text = "1. kör";
@@ -54,8 +54,8 @@ namespace prof1
         ArrowImage[] gridArrows = new ArrowImage[12];
         CircleImage[] gridCircles = new CircleImage[4];
         DataManager data = new DataManager("elso_proba.txt");
-        ArrowImage[] previousRoundArrows=new ArrowImage[12];
-        CircleImage[] previousRoundCircles =new CircleImage[4];
+        ArrowImage[] previousRoundArrows = new ArrowImage[12];
+        CircleImage[] previousRoundCircles = new CircleImage[4];
         bool forgatok { get; set; }
         void MovingCircle()
         {
@@ -100,9 +100,9 @@ namespace prof1
         {
             //if (image.Color.Equals("red") || image.Color.Equals("blue"))
             //{
-                gr_profit.Children.Remove(image);
-                Grid.SetColumn(image, image.Column);
-                gr_profit.Children.Add(image);
+            gr_profit.Children.Remove(image);
+            Grid.SetColumn(image, image.Column);
+            gr_profit.Children.Add(image);
             //}
             //else
             //{
@@ -202,11 +202,11 @@ namespace prof1
             }
 
             //add triangle
-            
+
             Grid.SetColumn(triangle, sourceColumn);
             Grid.SetRow(triangle, 0);
             gr_trendlinetable.Children.Add(triangle);
-            
+
             Grid.SetColumn(downtriangle, destinationColumn);
             Grid.SetRow(downtriangle, 0);
             gr_trendlinetable.Children.Add(downtriangle);
@@ -222,7 +222,7 @@ namespace prof1
         {
             if (task_index != data.Tasks.Length)
             {
-                
+
                 tbl_task.Text = data.Tasks[task_index];
 
                 if (data.TruckColors[task_index].Substring(0, 1) == "1")
@@ -256,7 +256,7 @@ namespace prof1
         TextBox tb_honnan = new TextBox();
         CheckBox cb_forgatok = new CheckBox();
         TextBox tb_hova = new TextBox();
-        
+
         private void NewWindow_NumberConfirmed(object sender, int number)
         {
             string num = number.ToString();
@@ -269,7 +269,7 @@ namespace prof1
             //    MovingCircle();
             //}
             New_Task();
-            
+
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num2}.png", UriKind.Relative));
             b_diceroll.IsEnabled = false;
@@ -309,7 +309,7 @@ namespace prof1
                     circle.Column = actionWindow.CardPosition;
                     MoveCircle(circle);
                 }
-                
+
             }
             if (IsEmpty && actionWindow.Honnan != 0)
             {
@@ -346,16 +346,12 @@ namespace prof1
                     catch (FormatException ex)
                     {
                         MessageBox.Show(ex.Message);
-
                     }
                 }
             }
-            else
+            else if (actionWindow.EnterIsPressed && sum != 7 && gridArrows[sum - 1] != null)
             {
-                if (sum != 7 && gridArrows[sum - 1] != null)
-                {
-                    MovingCircle();
-                }
+                MovingCircle();
             }
         }
         private void New_Round_Button(object sender, RoutedEventArgs e)
@@ -374,7 +370,7 @@ namespace prof1
             ArrowCopy();
             tbl_task.Text = "";
             roundIndex++;
-            if (roundIndex<data.Tasks.Length)
+            if (roundIndex < data.Tasks.Length)
             {
                 tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}";
                 tbl_round.Text = $"{roundIndex + 1}. kör";
@@ -412,9 +408,9 @@ namespace prof1
 
         private void b_admin_Click(object sender, RoutedEventArgs e)
         {
-            AdminWindow aw = new AdminWindow(gridArrows,gridCircles,previousRoundArrows,previousRoundCircles);
+            AdminWindow aw = new AdminWindow(gridArrows, gridCircles, previousRoundArrows, previousRoundCircles);
             //aw.Show();
-            if (aw.ShowDialog()==true)
+            if (aw.ShowDialog() == true)
             {
                 for (int i = 0; i < aw.gridArrows.Length; i++)
                 {
@@ -428,15 +424,15 @@ namespace prof1
                 for (int i = 0; i < aw.gridCircles.Length; i++)
                 {
                     gr_profit.Children.Remove(gridCircles[i]);
-                    
+
                     SetupCircleImage(aw.gridCircles[i]);
-                                       
+
                     gridCircles[i] = aw.gridCircles[i];
                 }
 
             }
         }
 
-       
+
     }
 }

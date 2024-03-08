@@ -32,8 +32,8 @@
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Content="Végrehajt" FontSize="16" Click="Button_Click_1" FontFamily="Montserrat" FontWeight="Bold"/>
 
 
-        <TextBox x:Name="tb_honnan" Grid.Row="1" Grid.Column="1" FontSize="16" FontFamily="Montserrat" FontWeight="DemiBold"/>
-        <TextBox x:Name="tb_hova" Grid.Row="2" Grid.Column="1" FontSize="16" FontFamily="Montserrat" FontWeight="DemiBold"/>
+        <TextBox x:Name="tb_honnan" Grid.Row="1" Grid.Column="1" FontSize="16" FontFamily="Montserrat" FontWeight="DemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="tb_hova" Grid.Row="2" Grid.Column="1" FontSize="16" FontFamily="Montserrat" FontWeight="DemiBold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
 
 
@@ -57,6 +57,6 @@
             <ComboBoxItem Content="sárga"/>
         </ComboBox>
         <Label Content="Pozíció:" Foreground="White" Grid.Row="2" Grid.Column="4" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15"  VerticalContentAlignment="Center"/>
-        <TextBox x:Name="tb_cardvalue" Grid.Row="2" Grid.Column="5" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15"/>
+        <TextBox x:Name="tb_cardvalue" Grid.Row="2" Grid.Column="5" FontFamily="Montserrat" FontWeight="DemiBold" FontSize="15" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </Window>

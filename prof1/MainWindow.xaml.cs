@@ -202,11 +202,12 @@ namespace prof1
             }
 
             //add triangle
-
+            gr_trendlinetable.Children.Remove(triangle);
             Grid.SetColumn(triangle, sourceColumn);
             Grid.SetRow(triangle, 0);
             gr_trendlinetable.Children.Add(triangle);
 
+            gr_trendlinetable.Children.Remove(downtriangle);
             Grid.SetColumn(downtriangle, destinationColumn);
             Grid.SetRow(downtriangle, 0);
             gr_trendlinetable.Children.Add(downtriangle);
@@ -252,11 +253,10 @@ namespace prof1
             diceWindow.NumberConfirmed += NewWindow_NumberConfirmed;
             diceWindow.Show();
 
-            Button upperView = b_diceroll; // Replace with the actual Button instance
+            Button upperView = b_diceroll;
             Point buttonPosition = upperView.PointToScreen(new Point(0, 0));
 
-            // Now, position the popup window below the Button
-            diceWindow.Left = buttonPosition.X-(upperView.ActualWidth*4); // Set the left position
+            diceWindow.Left = buttonPosition.X-(upperView.ActualWidth*4); 
             diceWindow.Top = buttonPosition.Y + (upperView.ActualHeight*3);
         }
         TextBox tb_honnan = new TextBox();
@@ -359,7 +359,7 @@ namespace prof1
                 MovingCircle();
             }
         }
-        private void New_Round_Button(object sender, RoutedEventArgs e)
+        void ResetTable()
         {
             b_diceroll.IsEnabled = true;
             b_action.IsEnabled = false;
@@ -371,10 +371,13 @@ namespace prof1
             im_truck1.Source = null;
             im_truck2.Source = null;
             im_truck3.Source = null;
-            task_index++;
-
-            ArrowCopy();
             tbl_task.Text = "";
+        }
+        private void New_Round_Button(object sender, RoutedEventArgs e)
+        {
+            ResetTable();
+            task_index++;
+            ArrowCopy();
             roundIndex++;
             if (roundIndex < data.Tasks.Length)
             {
@@ -418,6 +421,10 @@ namespace prof1
             //aw.Show();
             if (aw.ShowDialog() == true)
             {
+                if (aw.IsResetPressed)
+                {
+                    ResetTable();
+                }
                 for (int i = 0; i < aw.gridArrows.Length; i++)
                 {
                     gr_trendlinetable.Children.Remove(gridArrows[i]);

@@ -40,6 +40,7 @@ namespace prof1
         public CircleImage[] previousCircles;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            IsResetPressed = false;
             trendlinebuttons = new OptionalRadioButton[4, 10];
             rotatecheckbox = new CheckBox[10];
 
@@ -113,7 +114,7 @@ namespace prof1
                 }
             }
         }
-
+        public bool IsResetPressed { get; set; }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //gridArrows = new ArrowImage[12];
@@ -194,7 +195,7 @@ namespace prof1
 
         private void b_admin_Click(object sender, RoutedEventArgs e)
         {
-            
+            IsResetPressed = true;
             Array.Copy(previousArrows, gridArrows, gridArrows.Length);
             Array.Copy(previousCircles, gridCircles, gridCircles.Length);
             this.DialogResult = true;

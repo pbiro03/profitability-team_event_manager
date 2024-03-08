@@ -40,42 +40,37 @@ namespace prof1
             int j = 0;
             for (int i = 1; i < gridArrows.Length; i++)
             {
-                if (gridArrows[i]==null &&i!=6)
+                if (gridArrows[i] == null && i != 6)
                 {
-                    EmptyColumns[j] = i+1;
+                    EmptyColumns[j] = i + 1;
                     j++;
                 }
+            }
+        }
+        void CardCheck()
+        {
+            if ( !cb_cardcolor.Text.Equals("Válassz színt!")) //&&tb_cardvalue != null)
+            {
+                if (string.IsNullOrWhiteSpace(tb_cardvalue.Text))
+                {
+                    throw new ArgumentNullException("Adj meg egy számot", nameof(tb_cardvalue));
+                }
+                else if (!int.TryParse(tb_cardvalue.Text, out _) || int.Parse(tb_cardvalue.Text) < 1 || int.Parse(tb_cardvalue.Text) > 5 || tb_cardvalue.Text.Length > 1)
+                {
+                    throw new FormatException("Rossz bemeneti formátum.\n Annak az oszlopnak a sorszámát írd be, ahova az értékjelzőt szeretnéd tenni");
+                }
+                CardPosition = int.Parse(tb_cardvalue.Text);
+                CardColor = cb_cardcolor.Text;
+                DialogResult = true;
+            }
+            else if (cb_cardcolor.Text.Equals("Válassz színt!")&& tb_cardvalue.Text != string.Empty)
+            {
+                throw new ArgumentNullException("Adj meg egy színt");
             }
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             EnterIsPressed = true;
-            if (tb_cardvalue != null && !cb_cardcolor.Text.Equals("Válassz színt!"))
-            {
-                try
-                {
-                    if (string.IsNullOrWhiteSpace(tb_cardvalue.Text))
-                    {
-                        throw new ArgumentNullException("Adj meg egy számot", nameof(tb_cardvalue));
-                    }
-                    else if (!int.TryParse(tb_cardvalue.Text, out _) || int.Parse(tb_cardvalue.Text) < 1 || int.Parse(tb_cardvalue.Text) > 5 || tb_cardvalue.Text.Length > 1)
-                    {
-                        throw new FormatException("Rossz bemeneti formátum.\n Annak az oszlopnak a sorszámát írd be, ahova az értékjelzőt szeretnéd tenni");
-                    }
-                    CardPosition = int.Parse(tb_cardvalue.Text);
-                    CardColor = cb_cardcolor.Text;
-                    DialogResult = true;
-                }
-                catch (ArgumentNullException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                catch (FormatException ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
-            }
             if (cb_forgatok.IsChecked == true)
             {
                 Forgatok = true;
@@ -96,7 +91,7 @@ namespace prof1
                     {
                         throw new FormatException("Rossz bemeneti formátum.\n Annak a trendline pozíciónak a számát írd be, ahonnan a nyilat szeretnéd tenni");
                     }
-                    else if (int.Parse(tb_honnan.Text) == EmptyColumns[0] || int.Parse(tb_honnan.Text) == EmptyColumns[1] )
+                    else if (int.Parse(tb_honnan.Text) == EmptyColumns[0] || int.Parse(tb_honnan.Text) == EmptyColumns[1])
                     {
                         throw new FormatException("Rossz bemeneti formátum.\n Üres helyről nem lehet mozgatni");
                     }
@@ -104,6 +99,7 @@ namespace prof1
                     {
                         throw new FormatException("Rossz bemeneti formátum.\n Egy pozícióban csak egy nyíl lehet");
                     }
+                    CardCheck();
                     Honnan = int.Parse(tb_honnan.Text);
                     Hova = int.Parse(tb_hova.Text);
                     if (!cb_profitcolor.Text.Equals("Válassz színt!"))
@@ -126,7 +122,7 @@ namespace prof1
             }
             else
             {
-                
+
                 if (empty)
                 {
                     try
@@ -143,6 +139,7 @@ namespace prof1
                         {
                             throw new FormatException("Rossz bemeneti formátum.\n Üres helyről nem lehet mozgatni");
                         }
+                        CardCheck();
                         Honnan = int.Parse(tb_honnan.Text);
                         Hova = sum;
                         this.Close();
@@ -159,13 +156,21 @@ namespace prof1
                 }
                 else
                 {
-                    this.Close();
+                    try
+                    {
+                        CardCheck();
+                        this.Close();
+                    }
+                    catch (ArgumentNullException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    catch (FormatException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                
             }
-            
-
-
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

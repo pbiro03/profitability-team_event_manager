@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:prof1"
         mc:Ignorable="d"
-        Title="DiceWindow" Height="150" Width="100">
-    <Grid>
+        Title="DiceWindow" Height="150" Width="100"
+        Loaded="Window_Loaded"
+        KeyDown="Window_KeyDown">
+    <Grid x:Name="gr_dice">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <Label Content="Dobott számok:" Grid.Row="0"  VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Montserrat" FontWeight="DemiBold"/>
-        <TextBox x:Name="tb_num" Grid.Row="1" FontFamily="Montserrat" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button Content="Ok" Grid.Row="2" Click="Button_Click" FontFamily="Montserrat" FontWeight="Bold"/>
+        <!--<TextBox x:Name="tb_num" Grid.Row="1" FontFamily="Montserrat" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>-->
+        <Button x:Name="bt_ok" Content="Ok" Grid.Row="2" Click="Button_Click" FontFamily="Montserrat" FontWeight="Bold" />
 
     </Grid>
 </Window>

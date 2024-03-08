@@ -53,7 +53,7 @@ namespace prof1
         public int sum { get; set; }
         ArrowImage[] gridArrows = new ArrowImage[12];
         CircleImage[] gridCircles = new CircleImage[4];
-        DataManager data = new DataManager("elso_proba.txt");
+        DataManager data = new DataManager("input.txt");
         ArrowImage[] previousRoundArrows = new ArrowImage[12];
         CircleImage[] previousRoundCircles = new CircleImage[4];
         bool forgatok { get; set; }
@@ -73,14 +73,14 @@ namespace prof1
             do { i++; } while (!gridCircles[i].Color.Equals(act_color));
             if (gridCircles[i].Column == 5 && !gridArrows[sum - 1].IsMirrored)
             {
-                Grid.SetColumn(downtriangle, 11);
+                Grid.SetColumn(downtriangle, sum-1);
                 Grid.SetRow(downtriangle, 0);
                 gr_trendlinetable.Children.Add(downtriangle);
                 gridArrows[sum - 1].MirrorArrow();
             }
             else if (gridCircles[i].Column == 1 && gridArrows[sum - 1].IsMirrored)
             {
-                Grid.SetColumn(downtriangle, 1);
+                Grid.SetColumn(downtriangle, sum-1);
                 Grid.SetRow(downtriangle, 0);
                 gr_trendlinetable.Children.Add(downtriangle);
                 gridArrows[sum - 1].MirrorArrow();
@@ -241,7 +241,6 @@ namespace prof1
                     im_truck3.Source = new BitmapImage(new Uri("Images/Trucks/y_truck.png", UriKind.Relative));
                 else
                     im_truck3.Source = null;
-                task_index++;
             }
         }
 
@@ -249,9 +248,16 @@ namespace prof1
         {
             DiceWindow diceWindow = new DiceWindow();
             diceWindow.Owner = this;
-            diceWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            diceWindow.WindowStartupLocation = WindowStartupLocation.Manual;
             diceWindow.NumberConfirmed += NewWindow_NumberConfirmed;
             diceWindow.Show();
+
+            Button upperView = b_diceroll; // Replace with the actual Button instance
+            Point buttonPosition = upperView.PointToScreen(new Point(0, 0));
+
+            // Now, position the popup window below the Button
+            diceWindow.Left = buttonPosition.X-(upperView.ActualWidth*4); // Set the left position
+            diceWindow.Top = buttonPosition.Y + (upperView.ActualHeight*3);
         }
         TextBox tb_honnan = new TextBox();
         CheckBox cb_forgatok = new CheckBox();
@@ -272,7 +278,6 @@ namespace prof1
 
             img_dice1.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num1}.png", UriKind.Relative));
             img_dice2.Source = new BitmapImage(new Uri($"Images/Dices/dice_{num2}.png", UriKind.Relative));
-            b_diceroll.IsEnabled = false;
             b_action.IsEnabled = true;
         }
         bool IsEmpty { get; set; }
@@ -366,6 +371,7 @@ namespace prof1
             im_truck1.Source = null;
             im_truck2.Source = null;
             im_truck3.Source = null;
+            task_index++;
 
             ArrowCopy();
             tbl_task.Text = "";

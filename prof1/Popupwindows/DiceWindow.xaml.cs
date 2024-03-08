@@ -48,5 +48,27 @@ namespace prof1
                 MessageBox.Show(ex.Message);
             }
         }
+        TextBox tb_num = new TextBox();
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            tb_num.Name = "tb_num";
+            tb_num.FontFamily = new FontFamily("Montserrat");
+
+            tb_num.HorizontalContentAlignment = HorizontalAlignment.Center;
+            tb_num.VerticalContentAlignment = VerticalAlignment.Center;
+            
+            Grid.SetRow(tb_num, 1);
+            Grid.SetColumn(tb_num, 0);
+            gr_dice.Children.Add(tb_num);
+            tb_num.Focus();
+        }
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                //Simulate the button click
+               bt_ok.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            }
+        }
     }
 }

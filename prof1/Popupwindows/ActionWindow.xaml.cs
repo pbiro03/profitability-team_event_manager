@@ -175,6 +175,12 @@ namespace prof1
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            double mainWindowHeight = Application.Current.MainWindow.ActualHeight;
+            double mainWindowWidth = Application.Current.MainWindow.ActualWidth;
+            this.Height = mainWindowHeight / 3.3;
+            this.Width = mainWindowWidth / 4;
+            this.Left = mainWindowHeight * 1.35;
+            this.Top = mainWindowHeight * 0.2;
             if (sum != 7)
             {
                 tb_hova.IsEnabled = false;

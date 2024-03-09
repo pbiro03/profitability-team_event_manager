@@ -19,11 +19,13 @@ namespace prof1
     /// </summary>
     public partial class DiceWindow : Window
     {
-        public DiceWindow()
+        public DiceWindow(MainWindow window)
         {
+            this.window = window;
             InitializeComponent();
         }
         public event EventHandler<int> NumberConfirmed;
+        MainWindow window;
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -51,6 +53,12 @@ namespace prof1
         TextBox tb_num = new TextBox();
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            double mainWindowHeight = Application.Current.MainWindow.ActualHeight;
+            double mainWindowWidth = Application.Current.MainWindow.ActualWidth;
+            this.Height= mainWindowHeight/6;
+            this.Width= mainWindowWidth/14;
+            this.Left = mainWindowHeight * 1.55;
+            this.Top = mainWindowHeight * 0.2;
             tb_num.Name = "tb_num";
             tb_num.FontFamily = new FontFamily("Montserrat");
 

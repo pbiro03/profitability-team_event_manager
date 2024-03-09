@@ -15,13 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_1A239EEB0A844C5FA4F9D42A4D544189"
+        "MsmKey" = "8:_8D470BFBFDF948449C0089A8D3A4926E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_8D470BFBFDF948449C0089A8D3A4926E"
+        "MsmKey" = "8:_BE1A0071C585434FAE4105280E8CDB23"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -168,10 +168,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1A239EEB0A844C5FA4F9D42A4D544189"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D470BFBFDF948449C0089A8D3A4926E"
             {
-            "SourcePath" = "8:..\\prof1\\bin\\Release\\net5.0-windows\\win-x64\\publish\\elso_proba.txt"
-            "TargetName" = "8:input.txt"
+            "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\manus.ico"
+            "TargetName" = "8:manus.ico"
             "Tag" = "8:"
             "Folder" = "8:_02A9B362070547ECB18B3A72D90C35BF"
             "Condition" = "8:"
@@ -188,10 +188,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D470BFBFDF948449C0089A8D3A4926E"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BE1A0071C585434FAE4105280E8CDB23"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\manus.ico"
-            "TargetName" = "8:manus.ico"
+            "SourcePath" = "8:..\\prof1\\bin\\Debug\\net5.0-windows\\input.txt"
+            "TargetName" = "8:input.txt"
             "Tag" = "8:"
             "Folder" = "8:_02A9B362070547ECB18B3A72D90C35BF"
             "Condition" = "8:"

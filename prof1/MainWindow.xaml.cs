@@ -246,17 +246,11 @@ namespace prof1
 
         private void DiceRoll(object sender, RoutedEventArgs e)
         {
-            DiceWindow diceWindow = new DiceWindow();
+            DiceWindow diceWindow = new DiceWindow(this);
             diceWindow.Owner = this;
             diceWindow.WindowStartupLocation = WindowStartupLocation.Manual;
             diceWindow.NumberConfirmed += NewWindow_NumberConfirmed;
             diceWindow.Show();
-
-            Button upperView = b_diceroll;
-            Point buttonPosition = upperView.PointToScreen(new Point(0, 0));
-
-            diceWindow.Left = buttonPosition.X - (upperView.ActualWidth * 4);
-            diceWindow.Top = buttonPosition.Y + (upperView.ActualHeight * 3);
         }
         TextBox tb_honnan = new TextBox();
         CheckBox cb_forgatok = new CheckBox();
@@ -309,11 +303,11 @@ namespace prof1
                 IsEmpty = false;
             }
             actionWindow = new ActionWindow(sum, IsEmpty, gridArrows);
-            Button upperView = b_action;
-            Point buttonPosition = upperView.PointToScreen(new Point(0, 0));
-
-            actionWindow.Left = buttonPosition.X - (upperView.ActualWidth * 8);
-            actionWindow.Top = buttonPosition.Y  - (upperView.ActualHeight*1.3);
+            //actionWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            //actionWindow.Height = this.ActualHeight / 6;
+            //actionWindow.Width = this.ActualWidth / 14;
+            //actionWindow.Left = this.ActualHeight * 1.35;
+            //actionWindow.Top = this.ActualHeight * 0.2;
             if (actionWindow.ShowDialog() == true)
             {
                 if (actionWindow.CardColor != null)
@@ -443,6 +437,8 @@ namespace prof1
                 for (int i = 0; i < aw.gridArrows.Length; i++)
                 {
                     gr_trendlinetable.Children.Remove(gridArrows[i]);
+                    gr_trendlinetable.Children.Remove(triangle);
+                    gr_trendlinetable.Children.Remove(downtriangle);
                     if (aw.gridArrows[i] != null)
                     {
                         SetupArrowImage(aw.gridArrows[i]);

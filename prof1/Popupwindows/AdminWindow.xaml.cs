@@ -20,12 +20,14 @@ namespace prof1
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow(ArrowImage[] maingridArrows, CircleImage[] maingridCircles, ArrowImage[] previousRoundArrows, CircleImage[] PreviousRoundCircles)
+        public AdminWindow(ArrowImage[] maingridArrows, CircleImage[] maingridCircles, ArrowImage[] previousRoundArrows, CircleImage[] PreviousRoundCircles,int roundindex,int taskLength)
         {
             this.mainArrows = maingridArrows;
             this.mainCircles = maingridCircles;
             this.previousArrows = previousRoundArrows;
             this.previousCircles = PreviousRoundCircles;
+            this.roundIndex = roundindex;
+            this.taskLength = taskLength;
             InitializeComponent();
         }
         OptionalRadioButton[,] trendlinebuttons;
@@ -38,6 +40,8 @@ namespace prof1
         public CircleImage[] mainCircles;
         public ArrowImage[] previousArrows;
         public CircleImage[] previousCircles;
+        public int roundIndex;
+        int taskLength;
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             IsResetPressed = false;
@@ -112,6 +116,14 @@ namespace prof1
                     profitbuttons[i, j].GroupName = $"pr_{i}";
                     gr_profit.Children.Add(profitbuttons[i, j]);
                 }
+            }
+            for (int i = 0; i < taskLength; i++)
+            {
+                if (i==roundIndex)
+                {
+                    cb_round.SelectedIndex = i;
+                }
+                cb_round.Items.Add($"{i + 1}");
             }
         }
         public bool IsResetPressed { get; set; }
@@ -189,15 +201,17 @@ namespace prof1
                     }
                 }
             }
+            roundIndex = int.Parse(cb_round.Text);
             this.DialogResult = true;
             this.Close();
         }
-
+        MainWindow window = new MainWindow();
         private void b_admin_Click(object sender, RoutedEventArgs e)
         {
             IsResetPressed = true;
-            Array.Copy(previousArrows, gridArrows, gridArrows.Length);
-            Array.Copy(previousCircles, gridCircles, gridCircles.Length);
+            window.ArrowCopy(previousArrows,gridArrows,previousCircles,gridCircles);
+            //Array.Copy(previousArrows, gridArrows, gridArrows.Length);
+            //Array.Copy(previousCircles, gridCircles, gridCircles.Length);
             this.DialogResult = true;
             this.Close();
         }

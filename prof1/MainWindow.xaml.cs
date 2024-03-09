@@ -47,7 +47,7 @@ namespace prof1
             tbl_round.Text = "1. kör";
             PopulateGridArrows();
             PopulateGridCircles();
-            ArrowCopy();
+            ArrowCopy(gridArrows, previousRoundArrows, gridCircles, previousRoundCircles);
         }
         int roundIndex = 0;
         public int sum { get; set; }
@@ -73,14 +73,14 @@ namespace prof1
             do { i++; } while (!gridCircles[i].Color.Equals(act_color));
             if (gridCircles[i].Column == 5 && !gridArrows[sum - 1].IsMirrored)
             {
-                Grid.SetColumn(downtriangle, sum-1);
+                Grid.SetColumn(downtriangle, sum - 1);
                 Grid.SetRow(downtriangle, 0);
                 gr_trendlinetable.Children.Add(downtriangle);
                 gridArrows[sum - 1].MirrorArrow();
             }
             else if (gridCircles[i].Column == 1 && gridArrows[sum - 1].IsMirrored)
             {
-                Grid.SetColumn(downtriangle, sum-1);
+                Grid.SetColumn(downtriangle, sum - 1);
                 Grid.SetRow(downtriangle, 0);
                 gr_trendlinetable.Children.Add(downtriangle);
                 gridArrows[sum - 1].MirrorArrow();
@@ -218,27 +218,26 @@ namespace prof1
             gridArrows[sourceColumn] = null;
             gridArrows[destinationColumn] = sourceImage;
         }
-        int task_index = 0;
         private void New_Task()
         {
-            if (task_index != data.Tasks.Length)
+            if (roundIndex != data.Tasks.Length)
             {
 
-                tbl_task.Text = data.Tasks[task_index];
+                tbl_task.Text = data.Tasks[roundIndex];
 
-                if (data.TruckColors[task_index].Substring(0, 1) == "1")
+                if (data.TruckColors[roundIndex].Substring(0, 1) == "1")
                     im_truck0.Source = new BitmapImage(new Uri("Images/Trucks/r_truck.png", UriKind.Relative));
                 else
                     im_truck0.Source = null;
-                if (data.TruckColors[task_index].Substring(1, 1) == "1")
+                if (data.TruckColors[roundIndex].Substring(1, 1) == "1")
                     im_truck1.Source = new BitmapImage(new Uri("Images/Trucks/b_truck.png", UriKind.Relative));
                 else
                     im_truck1.Source = null;
-                if (data.TruckColors[task_index].Substring(2, 1) == "1")
+                if (data.TruckColors[roundIndex].Substring(2, 1) == "1")
                     im_truck2.Source = new BitmapImage(new Uri("Images/Trucks/g_truck.png", UriKind.Relative));
                 else
                     im_truck2.Source = null;
-                if (data.TruckColors[task_index].Substring(3, 1) == "1")
+                if (data.TruckColors[roundIndex].Substring(3, 1) == "1")
                     im_truck3.Source = new BitmapImage(new Uri("Images/Trucks/y_truck.png", UriKind.Relative));
                 else
                     im_truck3.Source = null;
@@ -256,8 +255,8 @@ namespace prof1
             Button upperView = b_diceroll;
             Point buttonPosition = upperView.PointToScreen(new Point(0, 0));
 
-            diceWindow.Left = buttonPosition.X-(upperView.ActualWidth*4); 
-            diceWindow.Top = buttonPosition.Y + (upperView.ActualHeight*3);
+            diceWindow.Left = buttonPosition.X - (upperView.ActualWidth * 4);
+            diceWindow.Top = buttonPosition.Y + (upperView.ActualHeight * 3);
         }
         TextBox tb_honnan = new TextBox();
         CheckBox cb_forgatok = new CheckBox();
@@ -305,7 +304,16 @@ namespace prof1
             {
                 IsEmpty = true;
             }
+            else
+            {
+                IsEmpty = false;
+            }
             actionWindow = new ActionWindow(sum, IsEmpty, gridArrows);
+            Button upperView = b_action;
+            Point buttonPosition = upperView.PointToScreen(new Point(0, 0));
+
+            actionWindow.Left = buttonPosition.X - (upperView.ActualWidth * 8);
+            actionWindow.Top = buttonPosition.Y  - (upperView.ActualHeight*1.3);
             if (actionWindow.ShowDialog() == true)
             {
                 if (actionWindow.CardColor != null)
@@ -376,8 +384,8 @@ namespace prof1
         private void New_Round_Button(object sender, RoutedEventArgs e)
         {
             ResetTable();
-            task_index++;
-            ArrowCopy();
+            //roundIndex++;
+            ArrowCopy(gridArrows, previousRoundArrows, gridCircles, previousRoundCircles);
             roundIndex++;
             if (roundIndex < data.Tasks.Length)
             {
@@ -389,41 +397,48 @@ namespace prof1
                 MessageBox.Show("Elfogytak a kártyák");
             }
         }
-        void ArrowCopy()
+        public void ArrowCopy(ArrowImage[] sourceArrows, ArrowImage[] destinationArrows, CircleImage[] sourceCircle, CircleImage[] destinationCircle)
         {
             int i = 0;
-            foreach (var arrow in gridArrows)
+            foreach (var arrow in sourceArrows)
             {
 
                 if (arrow != null)
                 {
                     ArrowImage newImage = new ArrowImage(arrow.Name, arrow.Column, arrow.Color.Substring(0, 1) + "_arrow.png", arrow.IsMirrored, arrow.Color);
-                    previousRoundArrows[i] = newImage;
+                    destinationArrows[i] = newImage;
                 }
                 else
                 {
-                    previousRoundArrows[i] = null;
+                    destinationArrows[i] = null;
                 }
                 i++;
             }
             i = 0;
-            foreach (var circle in gridCircles)
+            foreach (var circle in sourceCircle)
             {
                 CircleImage newImage = new CircleImage(circle.Name, circle.Color.Substring(0, 1) + "_circle.png", circle.Color, circle.Column);
-                previousRoundCircles[i] = newImage;
+                destinationCircle[i] = newImage;
                 i++;
             }
         }
 
         private void b_admin_Click(object sender, RoutedEventArgs e)
         {
-            AdminWindow aw = new AdminWindow(gridArrows, gridCircles, previousRoundArrows, previousRoundCircles);
+            AdminWindow aw = new AdminWindow(gridArrows, gridCircles, previousRoundArrows, previousRoundCircles, roundIndex, data.Tasks.Length);
             //aw.Show();
             if (aw.ShowDialog() == true)
             {
                 if (aw.IsResetPressed)
                 {
                     ResetTable();
+                }
+                else if (aw.roundIndex != roundIndex)
+                {
+                    roundIndex = aw.roundIndex - 1;
+                    tbl_teamnumber.Text = $"{data.WhichTeamsRound[roundIndex]}";
+                    tbl_round.Text = $"{roundIndex + 1}. kör";
+                    New_Task();
                 }
                 for (int i = 0; i < aw.gridArrows.Length; i++)
                 {
@@ -445,7 +460,5 @@ namespace prof1
 
             }
         }
-
-
     }
 }
